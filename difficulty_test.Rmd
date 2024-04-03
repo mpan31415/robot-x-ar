@@ -20,7 +20,6 @@ library(lme4)
 library(dplyr)
 library(ez)
 library(ltm)
-# library(rcompanion)
 ```
 
 
@@ -34,7 +33,7 @@ tlx_df <- read_csv("main_form_cleaned.csv")
 ######################### get mean and sd (or se) ######################### 
 tlx_df %>%
   group_by(condition) %>%
-  get_summary_stats(tlx_ave, type = "mean_sd")
+  get_summary_stats(difficulty, type = "mean_sd")
 
 
 tlx_dims_df <- data.frame(tlx_df$tlx_mental, tlx_df$tlx_physical, tlx_df$tlx_hurried, 
@@ -51,7 +50,7 @@ cronbach.alpha(tlx_dims_df, CI=TRUE)
 ```{r do plotting}
 
 # ######################### cool box plot (courtesy of Sarah) #########################
-# ggplot(tlx_df,aes(x=order,y=tlx_ave, fill=order))+geom_boxplot(aes(fill=order)) + labs( x = "Order", y = "tlx_ave", fill = "Order") +   theme_minimal() +
+# ggplot(tlx_df,aes(x=order,y=difficulty, fill=order))+geom_boxplot(aes(fill=order)) + labs( x = "Order", y = "difficulty", fill = "Order") +   theme_minimal() +
 # # stat_summary(fun = mean, geom = "point",size = 3, shape = 2, position = position_dodge(0.75), show.legend = FALSE) +
 # scale_fill_brewer(palette = "Set2") +
 #     theme(plot.title = element_text(size = 15, face = "bold"),
@@ -67,8 +66,8 @@ cronbach.alpha(tlx_dims_df, CI=TRUE)
 # 
 # 
 # ######################### cool dot plot #########################
-# ggplot(tlx_df,aes(x=order,y=tlx_ave, fill=order)) + geom_boxplot() + geom_dotplot(binaxis='y', stackdir='center', stackratio=1.5, dotsize=1.2) +
-#                     labs( x = "Order", y = "tlx_ave", fill = "Order") + theme_minimal() +
+# ggplot(tlx_df,aes(x=order,y=difficulty, fill=order)) + geom_boxplot() + geom_dotplot(binaxis='y', stackdir='center', stackratio=1.5, dotsize=1.2) +
+#                     labs( x = "Order", y = "difficulty", fill = "Order") + theme_minimal() +
 # # stat_summary(fun = mean, geom = "point",size = 3, shape = 2, position = position_dodge(0.75), show.legend = FALSE) +
 # scale_fill_brewer(palette = "Set2") +
 #     theme(plot.title = element_text(size = 15, face = "bold"),
@@ -96,7 +95,7 @@ cronbach.alpha(tlx_dims_df, CI=TRUE)
 # }
 # 
 # ######################### cool dot plot 2 ######################### 
-# p <- ggplot(tlx_df,aes(x=order,y=tlx_ave, fill=order)) + geom_dotplot(binaxis='y', stackdir='center', stackratio=1.5, dotsize=0.6) + 
+# p <- ggplot(tlx_df,aes(x=order,y=difficulty, fill=order)) + geom_dotplot(binaxis='y', stackdir='center', stackratio=1.5, dotsize=0.6) + 
 #                     labs( x = "Order", y = "NASA-TLX", fill = "Order") + theme_minimal() +
 # stat_summary(fun.y = mean, geom="crossbar", colour="red", width=0.5, size=0.5) +
 # scale_fill_brewer(palette = "Set2") +
@@ -115,14 +114,9 @@ cronbach.alpha(tlx_dims_df, CI=TRUE)
 # 
 # ggexport(p, filename = "pdfs/tlx.pdf")
 
-bxp <- ggboxplot(tlx_df, x = "condition", y = "tlx_ave", add = "point")
+bxp <- ggboxplot(tlx_df, x = "condition", y = "difficulty", add = "point", order=c("A", "B", "C", "D"))
 bxp
 # ggexport(bxp, filename = "tlx.png")
-
-tlx_df %>%
-  ggplot( aes(x=condition, y=tlx_ave)) +
-    geom_line() +
-    geom_point()
 
 ```
 
@@ -134,13 +128,13 @@ tlx_df %>%
 ######################### check for outliers ######################### 
 tlx_df %>%
   group_by(condition) %>%
-  identify_outliers(tlx_ave)
+  identify_outliers(difficulty)
 
 ######################### check normality ######################### 
 tlx_df %>%
   group_by(condition) %>%
-  shapiro_test(tlx_ave)
-ggqqplot(tlx_df, "tlx_ave", facet.by = "condition")
+  shapiro_test(difficulty)
+ggqqplot(tlx_df, "difficulty", facet.by = "condition")
 
 
 ```
@@ -151,40 +145,40 @@ ggqqplot(tlx_df, "tlx_ave", facet.by = "condition")
 ```{r fit model}
 
 ######################### Two-way mixed ANOVA test #########################  
-res.aov <- anova_test(data = tlx_df, dv = tlx_ave, wid = pid, within = condition)
+res.aov <- anova_test(data = tlx_df, dv = difficulty, wid = pid, within = condition)
 get_anova_table(res.aov)
 
 # pairwise comparisons
 pwc <- tlx_df %>%
   pairwise_t_test(
-    tlx_ave ~ condition, paired = TRUE,
+    difficulty ~ condition, paired = TRUE,
     p.adjust.method = "bonferroni"
     )
 pwc
 
 ##### kruskal-wallis test
-res.kruskal <- tlx_df %>% kruskal_test(tlx_ave ~ condition)
+res.kruskal <- tlx_df %>% kruskal_test(difficulty ~ condition)
 res.kruskal
 
-tlx_df %>% kruskal_effsize(tlx_ave ~ condition)
+tlx_df %>% kruskal_effsize(difficulty ~ condition)
 
 
 # ######################### SIG 2-WAY INTER: Pairwise comparisons between group levels #########################  
 # pwc <- tlx_df %>%
 #   group_by(condition) %>%
-#   pairwise_t_test(tlx_ave ~ order, p.adjust.method = "bonferroni")
+#   pairwise_t_test(difficulty ~ order, p.adjust.method = "bonferroni")
 # pwc
 # 
 # ######################### NON-SIG 2-WAY INTER: Pairwise comparisons between group levels #########################
 # tlx_df %>%
 #   pairwise_t_test(
-#     tlx_ave ~ autonomy, paired = TRUE,
+#     difficulty ~ autonomy, paired = TRUE,
 #     p.adjust.method = "bonferroni"
 #   )
 # 
 # tlx_df %>%
 #   pairwise_t_test(
-#     tlx_ave ~ order, 
+#     difficulty ~ order, 
 #     p.adjust.method = "bonferroni"
 #   )
 
