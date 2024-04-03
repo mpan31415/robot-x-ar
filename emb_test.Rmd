@@ -156,6 +156,12 @@ pwc <- emb_df %>%
     )
 pwc
 
+##### kruskal-wallis test
+res.kruskal <- tlx_df %>% kruskal_test(emb_ave ~ condition)
+res.kruskal
+
+tlx_df %>% kruskal_effsize(emb_ave ~ condition)
+
 
 # ######################### SIG 2-WAY INTER: Pairwise comparisons between group levels #########################  
 # pwc <- emb_df %>%
