@@ -50,79 +50,49 @@ cronbach.alpha(tlx_dims_df, CI=TRUE)
 
 ```{r do plotting}
 
-# ######################### cool box plot (courtesy of Sarah) #########################
-# ggplot(tlx_df,aes(x=order,y=tlx_ave, fill=order))+geom_boxplot(aes(fill=order)) + labs( x = "Order", y = "tlx_ave", fill = "Order") +   theme_minimal() +
-# # stat_summary(fun = mean, geom = "point",size = 3, shape = 2, position = position_dodge(0.75), show.legend = FALSE) +
-# scale_fill_brewer(palette = "Set2") +
-#     theme(plot.title = element_text(size = 15, face = "bold"),
-#         axis.title.x = element_text(size = 14, face = "bold"),
-#         axis.title.y = element_text(size = 14, face = "bold"),
-# axis.text = element_text(size = 16),
-#         legend.title = element_text(size = 12),
-#         legend.text = element_text(size = 11),
-#         legend.position= "none") +
-#   facet_grid(. ~ autonomy) +
-#   theme(axis.text.x = element_text(angle = 45, hjust = 1),
-#         strip.text.x = element_text(angle = 0, hjust = 0.5, size = 12), legend.position = "none")
-# 
-# 
-# ######################### cool dot plot #########################
-# ggplot(tlx_df,aes(x=order,y=tlx_ave, fill=order)) + geom_boxplot() + geom_dotplot(binaxis='y', stackdir='center', stackratio=1.5, dotsize=1.2) +
-#                     labs( x = "Order", y = "tlx_ave", fill = "Order") + theme_minimal() +
-# # stat_summary(fun = mean, geom = "point",size = 3, shape = 2, position = position_dodge(0.75), show.legend = FALSE) +
-# scale_fill_brewer(palette = "Set2") +
-#     theme(plot.title = element_text(size = 15, face = "bold"),
-#         axis.title.x = element_text(size = 14, face = "bold"),
-#         axis.title.y = element_text(size = 14, face = "bold"),
-#         axis.text = element_text(size = 16),
-#         legend.title = element_text(size = 12),
-#         legend.text = element_text(size = 11),
-#         legend.position= "none") +
-#   facet_grid(. ~ autonomy) +
-#   theme(axis.text.x = element_text(angle = 45, hjust = 1),
-#         strip.text.x = element_text(angle = 0, hjust = 0.5, size = 12), legend.position = "none")
+
+### tlx_mental ### 
+bxp <- ggboxplot(tlx_df, x = "condition", y = "tlx_mental", add = "point", order=c("A", "B", "C", "D"))
+bxp
+ggexport(bxp, filename = "tlx_mental.png")
+
+### tlx_physical ### 
+bxp <- ggboxplot(tlx_df, x = "condition", y = "tlx_physical", add = "point", order=c("A", "B", "C", "D"))
+bxp
+ggexport(bxp, filename = "tlx_physical.png")
+
+### tlx_hurried ### 
+bxp <- ggboxplot(tlx_df, x = "condition", y = "tlx_hurried", add = "point", order=c("A", "B", "C", "D"))
+bxp
+ggexport(bxp, filename = "tlx_hurried.png")
 
 
-# ## define custom median function
-# plot.median <- function(x) {
-#   m <- median(x)
-#   c(y = m, ymin = m, ymax = m)
-# }
-# 
-# ## define custom mean function
-# plot.median <- function(x) {
-#   m <- mean(x)
-#   c(y = m, ymin = m, ymax = m)
-# }
-# 
-# ######################### cool dot plot 2 ######################### 
-# p <- ggplot(tlx_df,aes(x=order,y=tlx_ave, fill=order)) + geom_dotplot(binaxis='y', stackdir='center', stackratio=1.5, dotsize=0.6) + 
-#                     labs( x = "Order", y = "NASA-TLX", fill = "Order") + theme_minimal() +
-# stat_summary(fun.y = mean, geom="crossbar", colour="red", width=0.5, size=0.5) +
-# scale_fill_brewer(palette = "Set2") +
-#     theme(plot.title = element_text(size = 15, face = "bold"),
-#         axis.title.x = element_text(size = 18, face = "bold"),
-#         axis.title.y = element_text(size = 18, face = "bold"),
-#         axis.text = element_text(size = 18),
-#         legend.title = element_text(size = 12),
-#         legend.text = element_text(size = 11),
-#         legend.position= "none") +
-#   facet_grid(. ~ autonomy, ) +
-#   theme(axis.text.x = element_text(angle = 45, hjust = 1),
-#         strip.text.x = element_text(angle = 0, hjust = 0.5, size = 18), legend.position = "none")
-# 
-# p
-# 
-# ggexport(p, filename = "pdfs/tlx.pdf")
+### tlx_successful ### 
+bxp <- ggboxplot(tlx_df, x = "condition", y = "tlx_successful", add = "point", order=c("A", "B", "C", "D"))
+bxp
+ggexport(bxp, filename = "tlx_successful.png")
 
+### tlx_hard ### 
+bxp <- ggboxplot(tlx_df, x = "condition", y = "tlx_hard", add = "point", order=c("A", "B", "C", "D"))
+bxp
+ggexport(bxp, filename = "tlx_hard.png")
+
+### tlx_insecure ### 
+bxp <- ggboxplot(tlx_df, x = "condition", y = "tlx_insecure", add = "point", order=c("A", "B", "C", "D"))
+bxp
+ggexport(bxp, filename = "tlx_insecure.png")
+
+
+### tlx_average ### 
 bxp <- ggboxplot(tlx_df, x = "condition", y = "tlx_ave", add = "point", order=c("A", "B", "C", "D"))
 bxp
-# ggexport(bxp, filename = "tlx.png")
+ggexport(bxp, filename = "tlx_ave.png")
 
-tlx_df %>%
-  ggplot( aes(x=condition, y=tlx_ave)) +
-    geom_line() +
-    geom_point()
+
+# tlx_df %>%
+#   ggplot( aes(x=condition, y=tlx_ave)) +
+#     geom_line() +
+#     geom_point()
 
 ```
 
@@ -150,8 +120,9 @@ ggqqplot(tlx_df, "tlx_ave", facet.by = "condition")
 
 ```{r fit model}
 
-######################### Two-way mixed ANOVA test #########################  
-res.aov <- anova_test(data = tlx_df, dv = tlx_ave, wid = pid, within = condition)
+###### tlx_mental ###### 
+
+res.aov <- anova_test(data = tlx_df, dv = tlx_mental, wid = pid, within = condition)
 get_anova_table(res.aov)
 
 # pairwise comparisons
@@ -163,30 +134,137 @@ pwc <- tlx_df %>%
 pwc
 
 ##### kruskal-wallis test
-res.kruskal <- tlx_df %>% kruskal_test(tlx_ave ~ condition)
+res.kruskal <- tlx_df %>% kruskal_test(tlx_mental ~ condition)
 res.kruskal
 
-tlx_df %>% kruskal_effsize(tlx_ave ~ condition)
+tlx_df %>% kruskal_effsize(tlx_mental ~ condition)
 
 
-# ######################### SIG 2-WAY INTER: Pairwise comparisons between group levels #########################  
-# pwc <- tlx_df %>%
-#   group_by(condition) %>%
-#   pairwise_t_test(tlx_ave ~ order, p.adjust.method = "bonferroni")
-# pwc
-# 
-# ######################### NON-SIG 2-WAY INTER: Pairwise comparisons between group levels #########################
-# tlx_df %>%
-#   pairwise_t_test(
-#     tlx_ave ~ autonomy, paired = TRUE,
-#     p.adjust.method = "bonferroni"
-#   )
-# 
-# tlx_df %>%
-#   pairwise_t_test(
-#     tlx_ave ~ order, 
-#     p.adjust.method = "bonferroni"
-#   )
+
+```
+
+```{r fit model}
+
+###### tlx_physical ###### 
+
+res.aov <- anova_test(data = tlx_df, dv = tlx_physical, wid = pid, within = condition)
+get_anova_table(res.aov)
+
+# pairwise comparisons
+pwc <- tlx_df %>%
+  pairwise_t_test(
+    tlx_ave ~ condition, paired = TRUE,
+    p.adjust.method = "bonferroni"
+    )
+pwc
+
+##### kruskal-wallis test
+res.kruskal <- tlx_df %>% kruskal_test(tlx_physical ~ condition)
+res.kruskal
+
+tlx_df %>% kruskal_effsize(tlx_physical ~ condition)
+
+
+
+```
+
+```{r fit model}
+
+###### tlx_hurried ###### 
+
+res.aov <- anova_test(data = tlx_df, dv = tlx_hurried, wid = pid, within = condition)
+get_anova_table(res.aov)
+
+# pairwise comparisons
+pwc <- tlx_df %>%
+  pairwise_t_test(
+    tlx_ave ~ condition, paired = TRUE,
+    p.adjust.method = "bonferroni"
+    )
+pwc
+
+##### kruskal-wallis test
+res.kruskal <- tlx_df %>% kruskal_test(tlx_hurried ~ condition)
+res.kruskal
+
+tlx_df %>% kruskal_effsize(tlx_hurried ~ condition)
+
+
+
+```
+
+```{r fit model}
+
+###### tlx_successful ###### 
+
+res.aov <- anova_test(data = tlx_df, dv = tlx_successful, wid = pid, within = condition)
+get_anova_table(res.aov)
+
+# pairwise comparisons
+pwc <- tlx_df %>%
+  pairwise_t_test(
+    tlx_ave ~ condition, paired = TRUE,
+    p.adjust.method = "bonferroni"
+    )
+pwc
+
+##### kruskal-wallis test
+res.kruskal <- tlx_df %>% kruskal_test(tlx_successful ~ condition)
+res.kruskal
+
+tlx_df %>% kruskal_effsize(tlx_successful ~ condition)
+
+
+
+```
+
+```{r fit model}
+
+###### tlx_hard ###### 
+
+res.aov <- anova_test(data = tlx_df, dv = tlx_hard, wid = pid, within = condition)
+get_anova_table(res.aov)
+
+# pairwise comparisons
+pwc <- tlx_df %>%
+  pairwise_t_test(
+    tlx_ave ~ condition, paired = TRUE,
+    p.adjust.method = "bonferroni"
+    )
+pwc
+
+##### kruskal-wallis test
+res.kruskal <- tlx_df %>% kruskal_test(tlx_hard ~ condition)
+res.kruskal
+
+tlx_df %>% kruskal_effsize(tlx_hard ~ condition)
+
+
+
+```
+
+```{r fit model}
+
+###### tlx_insecure ###### 
+
+res.aov <- anova_test(data = tlx_df, dv = tlx_insecure, wid = pid, within = condition)
+get_anova_table(res.aov)
+
+# pairwise comparisons
+pwc <- tlx_df %>%
+  pairwise_t_test(
+    tlx_ave ~ condition, paired = TRUE,
+    p.adjust.method = "bonferroni"
+    )
+pwc
+
+##### kruskal-wallis test
+res.kruskal <- tlx_df %>% kruskal_test(tlx_insecure ~ condition)
+res.kruskal
+
+tlx_df %>% kruskal_effsize(tlx_insecure ~ condition)
+
+
 
 ```
 

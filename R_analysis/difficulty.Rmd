@@ -116,7 +116,7 @@ cronbach.alpha(tlx_dims_df, CI=TRUE)
 
 bxp <- ggboxplot(tlx_df, x = "condition", y = "difficulty", add = "point", order=c("A", "B", "C", "D"))
 bxp
-# ggexport(bxp, filename = "tlx.png")
+ggexport(bxp, filename = "difficulty.png")
 
 ```
 

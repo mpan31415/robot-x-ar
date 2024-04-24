@@ -49,74 +49,56 @@ emb_dims_df <- data.frame(emb_df$emb1, emb_df$emb2, emb_df$emb3,
 
 ```{r do plotting}
 
-# ######################### cool box plot (courtesy of Sarah) #########################
-# ggplot(emb_df,aes(x=order,y=emb_ave, fill=order))+geom_boxplot(aes(fill=order)) + labs( x = "Order", y = "emb_ave", fill = "Order") +   theme_minimal() +
-# # stat_summary(fun = mean, geom = "point",size = 3, shape = 2, position = position_dodge(0.75), show.legend = FALSE) +
-# scale_fill_brewer(palette = "Set2") +
-#     theme(plot.title = element_text(size = 15, face = "bold"),
-#         axis.title.x = element_text(size = 14, face = "bold"),
-#         axis.title.y = element_text(size = 14, face = "bold"),
-# axis.text = element_text(size = 16),
-#         legend.title = element_text(size = 12),
-#         legend.text = element_text(size = 11),
-#         legend.position= "none") +
-#   facet_grid(. ~ autonomy) +
-#   theme(axis.text.x = element_text(angle = 45, hjust = 1),
-#         strip.text.x = element_text(angle = 0, hjust = 0.5, size = 12), legend.position = "none")
-# 
-# 
-# ######################### cool dot plot #########################
-# ggplot(emb_df,aes(x=order,y=emb_ave, fill=order)) + geom_boxplot() + geom_dotplot(binaxis='y', stackdir='center', stackratio=1.5, dotsize=1.2) +
-#                     labs( x = "Order", y = "emb_ave", fill = "Order") + theme_minimal() +
-# # stat_summary(fun = mean, geom = "point",size = 3, shape = 2, position = position_dodge(0.75), show.legend = FALSE) +
-# scale_fill_brewer(palette = "Set2") +
-#     theme(plot.title = element_text(size = 15, face = "bold"),
-#         axis.title.x = element_text(size = 14, face = "bold"),
-#         axis.title.y = element_text(size = 14, face = "bold"),
-#         axis.text = element_text(size = 16),
-#         legend.title = element_text(size = 12),
-#         legend.text = element_text(size = 11),
-#         legend.position= "none") +
-#   facet_grid(. ~ autonomy) +
-#   theme(axis.text.x = element_text(angle = 45, hjust = 1),
-#         strip.text.x = element_text(angle = 0, hjust = 0.5, size = 12), legend.position = "none")
+###### embodiment 1 ###### 
+bxp <- ggboxplot(emb_df, x = "condition", y = "emb_1", add = "point", order = c("A", "B", "C", "D"))
+bxp
+ggexport(bxp, filename = "embodiment1.png")
+
+###### embodiment 2 ###### 
+bxp <- ggboxplot(emb_df, x = "condition", y = "emb_2", add = "point", order = c("A", "B", "C", "D"))
+bxp
+ggexport(bxp, filename = "embodiment2.png")
 
 
-# ## define custom median function
-# plot.median <- function(x) {
-#   m <- median(x)
-#   c(y = m, ymin = m, ymax = m)
-# }
-# 
-# ## define custom mean function
-# plot.median <- function(x) {
-#   m <- mean(x)
-#   c(y = m, ymin = m, ymax = m)
-# }
-# 
-# ######################### cool dot plot 2 ######################### 
-# p <- ggplot(emb_df,aes(x=order,y=emb_ave, fill=order)) + geom_dotplot(binaxis='y', stackdir='center', stackratio=1.5, dotsize=0.6) + 
-#                     labs( x = "Order", y = "NASA-TLX", fill = "Order") + theme_minimal() +
-# stat_summary(fun.y = mean, geom="crossbar", colour="red", width=0.5, size=0.5) +
-# scale_fill_brewer(palette = "Set2") +
-#     theme(plot.title = element_text(size = 15, face = "bold"),
-#         axis.title.x = element_text(size = 18, face = "bold"),
-#         axis.title.y = element_text(size = 18, face = "bold"),
-#         axis.text = element_text(size = 18),
-#         legend.title = element_text(size = 12),
-#         legend.text = element_text(size = 11),
-#         legend.position= "none") +
-#   facet_grid(. ~ autonomy, ) +
-#   theme(axis.text.x = element_text(angle = 45, hjust = 1),
-#         strip.text.x = element_text(angle = 0, hjust = 0.5, size = 18), legend.position = "none")
-# 
-# p
-# 
-# ggexport(p, filename = "pdfs/tlx.pdf")
 
+###### embodiment 3 ###### 
+bxp <- ggboxplot(emb_df, x = "condition", y = "emb_3", add = "point", order = c("A", "B", "C", "D"))
+bxp
+ggexport(bxp, filename = "embodiment3.png")
+
+###### embodiment 4 ###### 
+bxp <- ggboxplot(emb_df, x = "condition", y = "emb_4", add = "point", order = c("A", "B", "C", "D"))
+bxp
+ggexport(bxp, filename = "embodiment4.png")
+
+###### embodiment 5 ###### 
+bxp <- ggboxplot(emb_df, x = "condition", y = "emb_5", add = "point", order = c("A", "B", "C", "D"))
+bxp
+ggexport(bxp, filename = "embodiment5.png")
+
+###### embodiment 6 ###### 
+bxp <- ggboxplot(emb_df, x = "condition", y = "emb_6", add = "point", order = c("A", "B", "C", "D"))
+bxp
+ggexport(bxp, filename = "embodiment6.png")
+
+
+
+###### ownership average ###### 
+bxp <- ggboxplot(emb_df, x = "condition", y = "owner_ave", add = "point", order = c("A", "B", "C", "D"))
+bxp
+ggexport(bxp, filename = "ownership.png")
+
+###### agency average ###### 
+bxp <- ggboxplot(emb_df, x = "condition", y = "agency_ave", add = "point", order = c("A", "B", "C", "D"))
+bxp
+ggexport(bxp, filename = "agency.png")
+
+
+
+###### embodiment average ###### 
 bxp <- ggboxplot(emb_df, x = "condition", y = "emb_ave", add = "point", order = c("A", "B", "C", "D"))
 bxp
-ggexport(bxp, filename = "embodiment.png")
+ggexport(bxp, filename = "embodiment_ave.png")
 
 ```
 
@@ -145,6 +127,190 @@ ggqqplot(emb_df, "emb_ave", facet.by = "condition")
 ```{r fit model}
 
 ######################### Two-way mixed ANOVA test #########################  
+res.aov <- anova_test(data = emb_df, dv = emb_1, wid = pid, within = condition)
+get_anova_table(res.aov)
+
+# pairwise comparisons
+pwc <- emb_df %>%
+  pairwise_t_test(
+    emb_ave ~ condition, paired = TRUE,
+    p.adjust.method = "bonferroni"
+    )
+pwc
+
+##### kruskal-wallis test
+res.kruskal <- tlx_df %>% kruskal_test(emb_1 ~ condition)
+res.kruskal
+
+tlx_df %>% kruskal_effsize(emb_1 ~ condition)
+
+
+```
+
+```{r fit model}
+
+######################### Two-way mixed ANOVA test #########################  
+res.aov <- anova_test(data = emb_df, dv = emb_2, wid = pid, within = condition)
+get_anova_table(res.aov)
+
+# pairwise comparisons
+pwc <- emb_df %>%
+  pairwise_t_test(
+    emb_ave ~ condition, paired = TRUE,
+    p.adjust.method = "bonferroni"
+    )
+pwc
+
+##### kruskal-wallis test
+res.kruskal <- tlx_df %>% kruskal_test(emb_2 ~ condition)
+res.kruskal
+
+tlx_df %>% kruskal_effsize(emb_2 ~ condition)
+
+
+```
+
+```{r fit model}
+
+######################### Two-way mixed ANOVA test #########################  
+res.aov <- anova_test(data = emb_df, dv = emb_3, wid = pid, within = condition)
+get_anova_table(res.aov)
+
+# pairwise comparisons
+pwc <- emb_df %>%
+  pairwise_t_test(
+    emb_ave ~ condition, paired = TRUE,
+    p.adjust.method = "bonferroni"
+    )
+pwc
+
+##### kruskal-wallis test
+res.kruskal <- tlx_df %>% kruskal_test(emb_3 ~ condition)
+res.kruskal
+
+tlx_df %>% kruskal_effsize(emb_3 ~ condition)
+
+
+```
+
+```{r fit model}
+
+######################### Two-way mixed ANOVA test #########################  
+res.aov <- anova_test(data = emb_df, dv = emb_4, wid = pid, within = condition)
+get_anova_table(res.aov)
+
+# pairwise comparisons
+pwc <- emb_df %>%
+  pairwise_t_test(
+    emb_ave ~ condition, paired = TRUE,
+    p.adjust.method = "bonferroni"
+    )
+pwc
+
+##### kruskal-wallis test
+res.kruskal <- tlx_df %>% kruskal_test(emb_4 ~ condition)
+res.kruskal
+
+tlx_df %>% kruskal_effsize(emb_4 ~ condition)
+
+
+```
+
+```{r fit model}
+
+######################### Two-way mixed ANOVA test #########################  
+res.aov <- anova_test(data = emb_df, dv = emb_5, wid = pid, within = condition)
+get_anova_table(res.aov)
+
+# pairwise comparisons
+pwc <- emb_df %>%
+  pairwise_t_test(
+    emb_ave ~ condition, paired = TRUE,
+    p.adjust.method = "bonferroni"
+    )
+pwc
+
+##### kruskal-wallis test
+res.kruskal <- tlx_df %>% kruskal_test(emb_5 ~ condition)
+res.kruskal
+
+tlx_df %>% kruskal_effsize(emb_5 ~ condition)
+
+
+```
+
+```{r fit model}
+
+######################### Two-way mixed ANOVA test #########################  
+res.aov <- anova_test(data = emb_df, dv = emb_6, wid = pid, within = condition)
+get_anova_table(res.aov)
+
+# pairwise comparisons
+pwc <- emb_df %>%
+  pairwise_t_test(
+    emb_ave ~ condition, paired = TRUE,
+    p.adjust.method = "bonferroni"
+    )
+pwc
+
+##### kruskal-wallis test
+res.kruskal <- tlx_df %>% kruskal_test(emb_6 ~ condition)
+res.kruskal
+
+tlx_df %>% kruskal_effsize(emb_6 ~ condition)
+
+
+```
+
+```{r fit model}
+
+######################### Two-way mixed ANOVA test #########################  
+res.aov <- anova_test(data = emb_df, dv = owner_ave, wid = pid, within = condition)
+get_anova_table(res.aov)
+
+# pairwise comparisons
+pwc <- emb_df %>%
+  pairwise_t_test(
+    emb_ave ~ condition, paired = TRUE,
+    p.adjust.method = "bonferroni"
+    )
+pwc
+
+##### kruskal-wallis test
+res.kruskal <- tlx_df %>% kruskal_test(owner_ave ~ condition)
+res.kruskal
+
+tlx_df %>% kruskal_effsize(owner_ave ~ condition)
+
+
+```
+
+```{r fit model}
+
+######################### Two-way mixed ANOVA test #########################  
+res.aov <- anova_test(data = emb_df, dv = agency_ave, wid = pid, within = condition)
+get_anova_table(res.aov)
+
+# pairwise comparisons
+pwc <- emb_df %>%
+  pairwise_t_test(
+    emb_ave ~ condition, paired = TRUE,
+    p.adjust.method = "bonferroni"
+    )
+pwc
+
+##### kruskal-wallis test
+res.kruskal <- tlx_df %>% kruskal_test(agency_ave ~ condition)
+res.kruskal
+
+tlx_df %>% kruskal_effsize(agency_ave ~ condition)
+
+
+```
+
+```{r fit model}
+
+######################### Two-way mixed ANOVA test #########################  
 res.aov <- anova_test(data = emb_df, dv = emb_ave, wid = pid, within = condition)
 get_anova_table(res.aov)
 
@@ -162,25 +328,6 @@ res.kruskal
 
 tlx_df %>% kruskal_effsize(emb_ave ~ condition)
 
-
-# ######################### SIG 2-WAY INTER: Pairwise comparisons between group levels #########################  
-# pwc <- emb_df %>%
-#   group_by(condition) %>%
-#   pairwise_t_test(emb_ave ~ order, p.adjust.method = "bonferroni")
-# pwc
-# 
-# ######################### NON-SIG 2-WAY INTER: Pairwise comparisons between group levels #########################
-# emb_df %>%
-#   pairwise_t_test(
-#     emb_ave ~ autonomy, paired = TRUE,
-#     p.adjust.method = "bonferroni"
-#   )
-# 
-# emb_df %>%
-#   pairwise_t_test(
-#     emb_ave ~ order, 
-#     p.adjust.method = "bonferroni"
-#   )
 
 ```
 
