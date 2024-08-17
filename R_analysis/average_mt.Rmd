@@ -1,0 +1,144 @@
+---
+title: "p_trust"
+output: html_document
+date: "2023-09-19"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Analysis script for "
+
+```{r load libraries}
+library(readr)
+library(tidyverse)
+library(ggpubr)
+library(rstatix)
+library(stats)
+library(lme4)
+library(dplyr)
+library(ez)
+library(ltm)
+# library(rcompanion)
+```
+
+
+## Extract dataframe from csv file and get (mean, sd) or (mean, se) summary
+
+```{r read csv}
+
+setwd("C:/Users/micha/OneDrive/My_GitHub_Repos/robot-x-ar/data/")
+task_df <- read_csv("merged_performance_data.csv")
+
+task_df$trial <- as_factor(task_df$trial)
+
+
+######################### get mean and sd (or se) ######################### 
+task_df %>%
+  group_by(condition) %>%
+  get_summary_stats(average_mt, type = "mean_sd")
+
+
+######################### get mean and sd (or se) ######################### 
+task_df %>%
+  group_by(trial) %>%
+  get_summary_stats(average_mt, type = "mean_sd")
+
+
+```
+
+## Plots
+
+```{r do plotting}
+
+bxp <- ggboxplot(task_df, x = "condition", y = "average_mt", add = "jitter")
+bxp
+# ggexport(bxp, filename = "tlx.png")
+
+
+bxp <- ggboxplot(task_df, x = "trial", y = "average_mt", add = "jitter")
+bxp
+# ggexport(bxp, filename = "tlx.png")
+
+
+bxp <- ggboxplot(task_df, x = "condition", y = "average_mt", color = "trial", add = "jitter")
+bxp
+# ggexport(bxp, filename = "tlx.png")
+
+
+```
+
+
+## Check assumptions
+
+```{r check assumptions}
+
+######################### check for outliers ######################### 
+task_df %>%
+  group_by(condition) %>%
+  identify_outliers(average_mt)
+
+######################### check normality ######################### 
+task_df %>%
+  group_by(condition) %>%
+  shapiro_test(average_mt)
+ggqqplot(task_df, "average_mt", facet.by = "condition")
+
+
+######################### check for outliers ######################### 
+task_df %>%
+  group_by(trial) %>%
+  identify_outliers(average_mt)
+
+######################### check normality ######################### 
+task_df %>%
+  group_by(trial) %>%
+  shapiro_test(average_mt)
+ggqqplot(task_df, "average_mt", facet.by = "trial")
+
+
+```
+
+
+## Fit Model
+
+```{r fit model}
+
+######################### Two-way mixed ANOVA test #########################  
+res.aov <- anova_test(data = task_df, dv = average_mt, wid = pid, within = c(condition, trial))
+get_anova_table(res.aov)
+
+
+######################### SIG: Pairwise comparisons between trials for each condition #########################  
+pwc <- task_df %>%
+  group_by(condition) %>%
+  pairwise_t_test(
+    average_mt ~ trial, paired = TRUE,
+    p.adjust.method = "holm"
+    )
+pwc
+
+
+######################### NON-SIG: Pairwise comparisons between conditions for each trial #########################  
+pwc <- task_df %>%
+  group_by(trial) %>%
+  pairwise_t_test(
+    average_mt ~ condition, paired = TRUE,
+    p.adjust.method = "holm"
+    )
+pwc
+
+
+# ###### kruskal-wallis test ######
+# res.kruskal <- task_df %>% kruskal_test(average_mt ~ condition)
+# res.kruskal
+# 
+# task_df %>% kruskal_effsize(average_mt ~ condition)
+
+
+
+```
+
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

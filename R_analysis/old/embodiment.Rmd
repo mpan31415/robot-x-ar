@@ -27,20 +27,20 @@ library(ltm)
 
 ```{r read csv}
 
-setwd("C:/Users/micha/OneDrive/My_GitHub_Repos/robot-x-ar/data/")
-form_df <- read_csv("merged_form_data.csv")
+setwd("C:/Users/micha/OneDrive/My_GitHub_Repos/robot-x-ar/data/questionnaire/")
+emb_df <- read_csv("main_form_cleaned.csv")
 
 ######################### get mean and sd (or se) ######################### 
-form_df %>%
+emb_df %>%
   group_by(condition) %>%
   get_summary_stats(emb_ave, type = "mean_sd")
 
 
-emb_dims_df <- data.frame(form_df$emb_1, form_df$emb_2, form_df$emb_3, 
-                          form_df$emb_4, form_df$emb_5, form_df$emb_6)
+emb_dims_df <- data.frame(emb_df$emb1, emb_df$emb2, emb_df$emb3, 
+                          emb_df$emb4, emb_df$emb5, emb_df$emb6)
 
 ######################### calculate Cronbach's Alpha with 95% confidence interval ######################### 
-cronbach.alpha(emb_dims_df, CI=TRUE)
+# cronbach.alpha(emb_dims_df, CI=TRUE)
 
 
 ```
@@ -49,54 +49,56 @@ cronbach.alpha(emb_dims_df, CI=TRUE)
 
 ```{r do plotting}
 
-# ###### embodiment 1 ###### 
-# bxp <- ggboxplot(form_df, x = "condition", y = "emb_1", add = "jitter", order = c("A", "B", "C", "D"))
-# bxp
-# # ggexport(bxp, filename = "embodiment1.png")
-# 
-# ###### embodiment 2 ###### 
-# bxp <- ggboxplot(form_df, x = "condition", y = "emb_2", add = "jitter", order = c("A", "B", "C", "D"))
-# bxp
-# # ggexport(bxp, filename = "embodiment2.png")
-# 
-# ###### embodiment 3 ###### 
-# bxp <- ggboxplot(form_df, x = "condition", y = "emb_3", add = "jitter", order = c("A", "B", "C", "D"))
-# bxp
-# # ggexport(bxp, filename = "embodiment3.png")
-# 
-# ###### embodiment 4 ###### 
-# bxp <- ggboxplot(form_df, x = "condition", y = "emb_4", add = "jitter", order = c("A", "B", "C", "D"))
-# bxp
-# # ggexport(bxp, filename = "embodiment4.png")
-# 
-# ###### embodiment 5 ###### 
-# bxp <- ggboxplot(form_df, x = "condition", y = "emb_5", add = "jitter", order = c("A", "B", "C", "D"))
-# bxp
-# # ggexport(bxp, filename = "embodiment5.png")
-# 
-# ###### embodiment 6 ###### 
-# bxp <- ggboxplot(form_df, x = "condition", y = "emb_6", add = "jitter", order = c("A", "B", "C", "D"))
-# bxp
-# # ggexport(bxp, filename = "embodiment6.png")
+###### embodiment 1 ###### 
+bxp <- ggboxplot(emb_df, x = "condition", y = "emb_1", add = "point", order = c("A", "B", "C", "D"))
+bxp
+ggexport(bxp, filename = "embodiment1.png")
+
+###### embodiment 2 ###### 
+bxp <- ggboxplot(emb_df, x = "condition", y = "emb_2", add = "point", order = c("A", "B", "C", "D"))
+bxp
+ggexport(bxp, filename = "embodiment2.png")
 
 
 
-# ###### ownership average ###### 
-# bxp <- ggboxplot(form_df, x = "condition", y = "owner_ave", add = "jitter", order = c("A", "B", "C", "D"))
-# bxp
-# # ggexport(bxp, filename = "ownership.png")
-# 
-# ###### agency average ###### 
-# bxp <- ggboxplot(form_df, x = "condition", y = "agency_ave", add = "jitter", order = c("A", "B", "C", "D"))
-# bxp
-# # ggexport(bxp, filename = "agency.png")
+###### embodiment 3 ###### 
+bxp <- ggboxplot(emb_df, x = "condition", y = "emb_3", add = "point", order = c("A", "B", "C", "D"))
+bxp
+ggexport(bxp, filename = "embodiment3.png")
+
+###### embodiment 4 ###### 
+bxp <- ggboxplot(emb_df, x = "condition", y = "emb_4", add = "point", order = c("A", "B", "C", "D"))
+bxp
+ggexport(bxp, filename = "embodiment4.png")
+
+###### embodiment 5 ###### 
+bxp <- ggboxplot(emb_df, x = "condition", y = "emb_5", add = "point", order = c("A", "B", "C", "D"))
+bxp
+ggexport(bxp, filename = "embodiment5.png")
+
+###### embodiment 6 ###### 
+bxp <- ggboxplot(emb_df, x = "condition", y = "emb_6", add = "point", order = c("A", "B", "C", "D"))
+bxp
+ggexport(bxp, filename = "embodiment6.png")
+
+
+
+###### ownership average ###### 
+bxp <- ggboxplot(emb_df, x = "condition", y = "owner_ave", add = "point", order = c("A", "B", "C", "D"))
+bxp
+ggexport(bxp, filename = "ownership.png")
+
+###### agency average ###### 
+bxp <- ggboxplot(emb_df, x = "condition", y = "agency_ave", add = "point", order = c("A", "B", "C", "D"))
+bxp
+ggexport(bxp, filename = "agency.png")
 
 
 
 ###### embodiment average ###### 
-bxp <- ggboxplot(form_df, x = "condition", y = "emb_ave", add = "jitter", order = c("A", "B", "C", "D"))
+bxp <- ggboxplot(emb_df, x = "condition", y = "emb_ave", add = "point", order = c("A", "B", "C", "D"))
 bxp
-# ggexport(bxp, filename = "embodiment_ave.png")
+ggexport(bxp, filename = "embodiment_ave.png")
 
 ```
 
@@ -106,15 +108,15 @@ bxp
 ```{r check assumptions}
 
 ######################### check for outliers ######################### 
-form_df %>%
+emb_df %>%
   group_by(condition) %>%
   identify_outliers(emb_ave)
 
 ######################### check normality ######################### 
-form_df %>%
+emb_df %>%
   group_by(condition) %>%
   shapiro_test(emb_ave)
-ggqqplot(form_df, "emb_ave", facet.by = "condition")
+ggqqplot(emb_df, "emb_ave", facet.by = "condition")
 
 
 ```
@@ -125,14 +127,14 @@ ggqqplot(form_df, "emb_ave", facet.by = "condition")
 ```{r fit model}
 
 ######################### Two-way mixed ANOVA test #########################  
-res.aov <- anova_test(data = form_df, dv = emb_1, wid = pid, within = condition)
+res.aov <- anova_test(data = emb_df, dv = emb_1, wid = pid, within = condition)
 get_anova_table(res.aov)
 
 # pairwise comparisons
-pwc <- form_df %>%
+pwc <- emb_df %>%
   pairwise_t_test(
     emb_ave ~ condition, paired = TRUE,
-    p.adjust.method = "holm"
+    p.adjust.method = "bonferroni"
     )
 pwc
 
@@ -148,14 +150,14 @@ tlx_df %>% kruskal_effsize(emb_1 ~ condition)
 ```{r fit model}
 
 ######################### Two-way mixed ANOVA test #########################  
-res.aov <- anova_test(data = form_df, dv = emb_2, wid = pid, within = condition)
+res.aov <- anova_test(data = emb_df, dv = emb_2, wid = pid, within = condition)
 get_anova_table(res.aov)
 
 # pairwise comparisons
-pwc <- form_df %>%
+pwc <- emb_df %>%
   pairwise_t_test(
     emb_ave ~ condition, paired = TRUE,
-    p.adjust.method = "holm"
+    p.adjust.method = "bonferroni"
     )
 pwc
 
@@ -171,14 +173,14 @@ tlx_df %>% kruskal_effsize(emb_2 ~ condition)
 ```{r fit model}
 
 ######################### Two-way mixed ANOVA test #########################  
-res.aov <- anova_test(data = form_df, dv = emb_3, wid = pid, within = condition)
+res.aov <- anova_test(data = emb_df, dv = emb_3, wid = pid, within = condition)
 get_anova_table(res.aov)
 
 # pairwise comparisons
-pwc <- form_df %>%
+pwc <- emb_df %>%
   pairwise_t_test(
     emb_ave ~ condition, paired = TRUE,
-    p.adjust.method = "holm"
+    p.adjust.method = "bonferroni"
     )
 pwc
 
@@ -194,14 +196,14 @@ tlx_df %>% kruskal_effsize(emb_3 ~ condition)
 ```{r fit model}
 
 ######################### Two-way mixed ANOVA test #########################  
-res.aov <- anova_test(data = form_df, dv = emb_4, wid = pid, within = condition)
+res.aov <- anova_test(data = emb_df, dv = emb_4, wid = pid, within = condition)
 get_anova_table(res.aov)
 
 # pairwise comparisons
-pwc <- form_df %>%
+pwc <- emb_df %>%
   pairwise_t_test(
     emb_ave ~ condition, paired = TRUE,
-    p.adjust.method = "holm"
+    p.adjust.method = "bonferroni"
     )
 pwc
 
@@ -217,14 +219,14 @@ tlx_df %>% kruskal_effsize(emb_4 ~ condition)
 ```{r fit model}
 
 ######################### Two-way mixed ANOVA test #########################  
-res.aov <- anova_test(data = form_df, dv = emb_5, wid = pid, within = condition)
+res.aov <- anova_test(data = emb_df, dv = emb_5, wid = pid, within = condition)
 get_anova_table(res.aov)
 
 # pairwise comparisons
-pwc <- form_df %>%
+pwc <- emb_df %>%
   pairwise_t_test(
     emb_ave ~ condition, paired = TRUE,
-    p.adjust.method = "holm"
+    p.adjust.method = "bonferroni"
     )
 pwc
 
@@ -240,14 +242,14 @@ tlx_df %>% kruskal_effsize(emb_5 ~ condition)
 ```{r fit model}
 
 ######################### Two-way mixed ANOVA test #########################  
-res.aov <- anova_test(data = form_df, dv = emb_6, wid = pid, within = condition)
+res.aov <- anova_test(data = emb_df, dv = emb_6, wid = pid, within = condition)
 get_anova_table(res.aov)
 
 # pairwise comparisons
-pwc <- form_df %>%
+pwc <- emb_df %>%
   pairwise_t_test(
     emb_ave ~ condition, paired = TRUE,
-    p.adjust.method = "holm"
+    p.adjust.method = "bonferroni"
     )
 pwc
 
@@ -263,14 +265,14 @@ tlx_df %>% kruskal_effsize(emb_6 ~ condition)
 ```{r fit model}
 
 ######################### Two-way mixed ANOVA test #########################  
-res.aov <- anova_test(data = form_df, dv = owner_ave, wid = pid, within = condition)
+res.aov <- anova_test(data = emb_df, dv = owner_ave, wid = pid, within = condition)
 get_anova_table(res.aov)
 
 # pairwise comparisons
-pwc <- form_df %>%
+pwc <- emb_df %>%
   pairwise_t_test(
     emb_ave ~ condition, paired = TRUE,
-    p.adjust.method = "holm"
+    p.adjust.method = "bonferroni"
     )
 pwc
 
@@ -286,14 +288,14 @@ tlx_df %>% kruskal_effsize(owner_ave ~ condition)
 ```{r fit model}
 
 ######################### Two-way mixed ANOVA test #########################  
-res.aov <- anova_test(data = form_df, dv = agency_ave, wid = pid, within = condition)
+res.aov <- anova_test(data = emb_df, dv = agency_ave, wid = pid, within = condition)
 get_anova_table(res.aov)
 
 # pairwise comparisons
-pwc <- form_df %>%
+pwc <- emb_df %>%
   pairwise_t_test(
     emb_ave ~ condition, paired = TRUE,
-    p.adjust.method = "holm"
+    p.adjust.method = "bonferroni"
     )
 pwc
 
@@ -309,23 +311,22 @@ tlx_df %>% kruskal_effsize(agency_ave ~ condition)
 ```{r fit model}
 
 ######################### Two-way mixed ANOVA test #########################  
-res.aov <- anova_test(data = form_df, dv = emb_ave, wid = pid, within = condition)
+res.aov <- anova_test(data = emb_df, dv = emb_ave, wid = pid, within = condition)
 get_anova_table(res.aov)
 
 # pairwise comparisons
-pwc <- form_df %>%
+pwc <- emb_df %>%
   pairwise_t_test(
     emb_ave ~ condition, paired = TRUE,
-    p.adjust.method = "holm"
+    p.adjust.method = "bonferroni"
     )
 pwc
 
+##### kruskal-wallis test
+res.kruskal <- tlx_df %>% kruskal_test(emb_ave ~ condition)
+res.kruskal
 
-# ##### kruskal-wallis test
-# res.kruskal <- tlx_df %>% kruskal_test(emb_ave ~ condition)
-# res.kruskal
-# 
-# tlx_df %>% kruskal_effsize(emb_ave ~ condition)
+tlx_df %>% kruskal_effsize(emb_ave ~ condition)
 
 
 ```

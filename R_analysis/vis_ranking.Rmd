@@ -1,0 +1,115 @@
+---
+title: "p_trust"
+output: html_document
+date: "2023-09-19"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Analysis script for "
+
+```{r load libraries}
+library(readr)
+library(tidyverse)
+library(ggpubr)
+library(rstatix)
+library(stats)
+library(lme4)
+library(dplyr)
+library(ez)
+library(ltm)
+```
+
+
+## Extract dataframe from csv file and get (mean, sd) or (mean, se) summary
+
+```{r read csv}
+
+setwd("C:/Users/micha/OneDrive/My_GitHub_Repos/robot-x-ar/data/questionnaire/")
+rank_df <- read_csv("vis_ranking.csv")
+
+
+######################### get mean and sd (or se) ######################### 
+rank_df %>%
+  group_by(condition) %>%
+  get_summary_stats(ranking, type = "mean_sd")
+
+
+```
+
+## Plots
+
+```{r do plotting}
+
+bxp <- ggboxplot(rank_df, x = "condition", y = "ranking", add = "jitter")
+bxp
+# ggexport(bxp, filename = "tlx.png")
+
+
+```
+
+
+## Check assumptions
+
+```{r check assumptions}
+
+######################### check for outliers ######################### 
+rank_df %>%
+  group_by(condition) %>%
+  identify_outliers(ranking)
+
+######################### check normality ######################### 
+rank_df %>%
+  group_by(condition) %>%
+  shapiro_test(ranking)
+ggqqplot(rank_df, "ranking", facet.by = "condition")
+
+
+```
+
+
+## Fit Model
+
+```{r fit model}
+
+######################### Two-way mixed ANOVA test #########################
+res.aov <- anova_test(data = rank_df, dv = ranking, wid = pid, within = condition)
+get_anova_table(res.aov)
+
+
+# Compute the analysis of variance
+res.aov <- aov(ranking ~ condition, data = rank_df)
+# Summary of the analysis
+summary(res.aov)
+
+# TukeyHSD(res.aov)
+
+
+res <- pairwise.t.test(rank_df$ranking, rank_df$condition,
+                 p.adjust.method = "holm")
+res 
+
+
+######################### SIG: Pairwise comparisons between trials for each condition #########################  
+pwc <- rank_df %>%
+  pairwise_t_test(
+    ranking ~ condition, paired = TRUE,
+    p.adjust.method = "holm"
+    )
+pwc
+
+
+# ###### kruskal-wallis test ######
+# res.kruskal <- rank_df %>% kruskal_test(ranking ~ condition)
+# res.kruskal
+# 
+# rank_df %>% kruskal_effsize(ranking ~ condition)
+
+
+
+```
+
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

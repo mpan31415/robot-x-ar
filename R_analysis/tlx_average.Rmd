@@ -33,7 +33,14 @@ form_df <- read_csv("merged_form_data.csv")
 ######################### get mean and sd (or se) ######################### 
 form_df %>%
   group_by(condition) %>%
-  get_summary_stats(difficulty, type = "mean_sd")
+  get_summary_stats(tlx_ave, type = "mean_sd")
+
+
+tlx_dims_df <- data.frame(tlx_df$tlx_mental, tlx_df$tlx_physical, tlx_df$tlx_hurried, 
+                          tlx_df$tlx_successful, tlx_df$tlx_hard, tlx_df$tlx_insecure)
+
+######################### calculate Cronbach's Alpha with 95% confidence interval ######################### 
+cronbach.alpha(tlx_dims_df, CI=TRUE)
 
 
 ```
@@ -42,9 +49,9 @@ form_df %>%
 
 ```{r do plotting}
 
-bxp <- ggboxplot(form_df, x = "condition", y = "difficulty", add = "jitter", order=c("A", "B", "C", "D"))
+bxp <- ggboxplot(form_df, x = "condition", y = "tlx_ave", add = "jitter", order=c("A", "B", "C", "D"))
 bxp
-# ggexport(bxp, filename = "difficulty.png")
+# ggexport(bxp, filename = "tlx_ave.png")
 
 ```
 
@@ -56,13 +63,13 @@ bxp
 ######################### check for outliers ######################### 
 form_df %>%
   group_by(condition) %>%
-  identify_outliers(difficulty)
+  identify_outliers(tlx_ave)
 
 ######################### check normality ######################### 
 form_df %>%
   group_by(condition) %>%
-  shapiro_test(difficulty)
-ggqqplot(form_df, "difficulty", facet.by = "condition")
+  shapiro_test(tlx_ave)
+ggqqplot(form_df, "tlx_ave", facet.by = "condition")
 
 
 ```
@@ -73,23 +80,23 @@ ggqqplot(form_df, "difficulty", facet.by = "condition")
 ```{r fit model}
 
 ######################### Two-way mixed ANOVA test #########################  
-res.aov <- anova_test(data = form_df, dv = difficulty, wid = pid, within = condition)
+res.aov <- anova_test(data = form_df, dv = tlx_ave, wid = pid, within = condition)
 get_anova_table(res.aov)
 
 # pairwise comparisons
 pwc <- form_df %>%
   pairwise_t_test(
-    difficulty ~ condition, paired = TRUE,
+    tlx_ave ~ condition, paired = TRUE,
     p.adjust.method = "holm"
     )
 pwc
 
 
 # ##### kruskal-wallis test
-# res.kruskal <- form_df %>% kruskal_test(difficulty ~ condition)
+# res.kruskal <- form_df %>% kruskal_test(tlx_ave ~ condition)
 # res.kruskal
 # 
-# form_df %>% kruskal_effsize(difficulty ~ condition)
+# form_df %>% kruskal_effsize(tlx_ave ~ condition)
 
 
 ```
