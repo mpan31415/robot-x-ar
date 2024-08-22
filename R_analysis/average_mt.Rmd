@@ -20,7 +20,6 @@ library(lme4)
 library(dplyr)
 library(ez)
 library(ltm)
-# library(rcompanion)
 ```
 
 
@@ -43,6 +42,12 @@ task_df %>%
 ######################### get mean and sd (or se) ######################### 
 task_df %>%
   group_by(trial) %>%
+  get_summary_stats(average_mt, type = "mean_sd")
+
+
+######################### get mean and sd (or se) ######################### 
+task_df %>%
+  group_by(condition, trial) %>%
   get_summary_stats(average_mt, type = "mean_sd")
 
 
@@ -105,9 +110,19 @@ ggqqplot(task_df, "average_mt", facet.by = "trial")
 
 ```{r fit model}
 
+############ learning effect - check difference between all trial 1 and trial 2 ############
+############ using paired sample t-test ############
+res <- t.test(average_mt ~ trial, data = task_df, paired = TRUE)
+res
+
+############ ANOVA - move time against viz condition ############
+res.aov <- task_df %>% anova_test(average_mt ~ condition, wid=pid)
+res.aov
+
+
 ######################### Two-way mixed ANOVA test #########################  
-res.aov <- anova_test(data = task_df, dv = average_mt, wid = pid, within = c(condition, trial))
-get_anova_table(res.aov)
+# res.aov <- anova_test(data = task_df, dv = average_mt, wid = pid, within = c(condition, trial))
+# get_anova_table(res.aov)
 
 
 ######################### SIG: Pairwise comparisons between trials for each condition #########################  
@@ -119,15 +134,21 @@ pwc <- task_df %>%
     )
 pwc
 
+# ######################### SIG: Pairwise comparisons between trials for each condition #########################  
+# pwc <- task_df %>%
+#   group_by(condition) %>%
+#   t.test(average_mt ~ trial, data = task_df, paired = TRUE)
+# pwc
+
 
 ######################### NON-SIG: Pairwise comparisons between conditions for each trial #########################  
-pwc <- task_df %>%
-  group_by(trial) %>%
-  pairwise_t_test(
-    average_mt ~ condition, paired = TRUE,
-    p.adjust.method = "holm"
-    )
-pwc
+# pwc <- task_df %>%
+#   group_by(trial) %>%
+#   pairwise_t_test(
+#     average_mt ~ condition, paired = TRUE,
+#     p.adjust.method = "holm"
+#     )
+# pwc
 
 
 # ###### kruskal-wallis test ######

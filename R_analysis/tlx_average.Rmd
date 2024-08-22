@@ -36,8 +36,8 @@ form_df %>%
   get_summary_stats(tlx_ave, type = "mean_sd")
 
 
-tlx_dims_df <- data.frame(tlx_df$tlx_mental, tlx_df$tlx_physical, tlx_df$tlx_hurried, 
-                          tlx_df$tlx_successful, tlx_df$tlx_hard, tlx_df$tlx_insecure)
+tlx_dims_df <- data.frame(form_df$tlx_mental, form_df$tlx_physical, form_df$tlx_hurried, 
+                          form_df$tlx_successful, form_df$tlx_hard, form_df$tlx_insecure)
 
 ######################### calculate Cronbach's Alpha with 95% confidence interval ######################### 
 cronbach.alpha(tlx_dims_df, CI=TRUE)
@@ -100,6 +100,36 @@ pwc
 
 
 ```
+
+```{r fit model}
+
+######################### mental #########################  
+res.aov <- anova_test(data = form_df, dv = tlx_mental, wid = pid, within = condition)
+get_anova_table(res.aov)
+
+######################### physical #########################  
+res.aov <- anova_test(data = form_df, dv = tlx_physical, wid = pid, within = condition)
+get_anova_table(res.aov)
+
+######################### hurried #########################  
+res.aov <- anova_test(data = form_df, dv = tlx_hurried, wid = pid, within = condition)
+get_anova_table(res.aov)
+
+######################### successful #########################  
+res.aov <- anova_test(data = form_df, dv = tlx_successful, wid = pid, within = condition)
+get_anova_table(res.aov)
+
+######################### hard #########################  
+res.aov <- anova_test(data = form_df, dv = tlx_hard, wid = pid, within = condition)
+get_anova_table(res.aov)
+
+######################### insecure #########################  
+res.aov <- anova_test(data = form_df, dv = tlx_insecure, wid = pid, within = condition)
+get_anova_table(res.aov)
+
+
+```
+
 
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

@@ -74,15 +74,18 @@ ggqqplot(rank_df, "ranking", facet.by = "condition")
 
 ```{r fit model}
 
-######################### Two-way mixed ANOVA test #########################
-res.aov <- anova_test(data = rank_df, dv = ranking, wid = pid, within = condition)
-get_anova_table(res.aov)
+# ######################### Two-way mixed ANOVA test #########################
+# res.aov <- anova_test(data = rank_df, dv = ranking, wid = pid, within = condition)
+# get_anova_table(res.aov)
+
+res.aov <- rank_df %>% anova_test(ranking ~ condition, wid=pid)
+res.aov
 
 
-# Compute the analysis of variance
-res.aov <- aov(ranking ~ condition, data = rank_df)
-# Summary of the analysis
-summary(res.aov)
+# # Compute the analysis of variance
+# res.aov <- aov(ranking ~ condition, data = rank_df)
+# # Summary of the analysis
+# summary(res.aov)
 
 # TukeyHSD(res.aov)
 
