@@ -27,7 +27,7 @@ library(ltm)
 
 ```{r read csv}
 
-setwd("C:/Users/micha/OneDrive/My_GitHub_Repos/robot-x-ar/study1/data/")
+setwd("C:/Users/micha/OneDrive/My_GitHub_Repos/robot-x-ar/data/")
 task_df <- read_csv("merged_performance_data.csv")
 
 task_df$trial <- as_factor(task_df$trial)

@@ -27,7 +27,7 @@ library(ltm)
 
 ```{r read csv}
 
-setwd("C:/Users/micha/OneDrive/My_GitHub_Repos/robot-x-ar/study1/data/questionnaire/")
+setwd("C:/Users/micha/OneDrive/My_GitHub_Repos/robot-x-ar/data/questionnaire/")
 rank_df <- read_csv("vis_ranking.csv")
 
 

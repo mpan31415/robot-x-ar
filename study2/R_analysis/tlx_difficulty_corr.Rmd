@@ -29,7 +29,7 @@ library(lmerTest)
 
 ```{r read csv}
 
-setwd("C:/Users/micha/OneDrive/My_GitHub_Repos/robot-x-ar/study1/data/")
+setwd("C:/Users/micha/OneDrive/My_GitHub_Repos/robot-x-ar/data/")
 form_df <- read_csv("merged_form_data.csv")
 
 
