@@ -1,0 +1,118 @@
+---
+title: "p_trust"
+output: html_document
+date: "2023-09-19"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Analysis script for "
+
+```{r load libraries}
+library(readr)
+library(tidyverse)
+library(ggpubr)
+library(rstatix)
+library(stats)
+library(lme4)
+library(dplyr)
+library(ez)
+library(ltm)
+```
+
+
+## Extract dataframe from csv file and get (mean, sd) or (mean, se) summary
+
+```{r read csv}
+
+setwd("C:/Users/micha/OneDrive/My_GitHub_Repos/robot-x-ar/study2/data/task_performance/")
+task_df <- read_csv("movement_time_all.csv")
+
+
+######################### get mean and sd (or se) ######################### 
+task_df %>%
+  group_by(condition) %>%
+  get_summary_stats(mt, type = "mean_sd")
+
+######################### get mean and sd (or se) ######################### 
+task_df %>%
+  group_by(postures) %>%
+  get_summary_stats(mt, type = "mean_sd")
+
+
+```
+
+## Plots
+
+```{r do plotting}
+
+bxp <- ggboxplot(task_df, x = "condition", y = "mt", add = "jitter")
+bxp
+
+bxp <- ggboxplot(task_df, x = "posture", y = "mt", add = "jitter", color = "condition")
+bxp
+# ggexport(bxp, filename = "tlx.png")
+
+
+```
+
+
+## Check assumptions
+
+```{r check assumptions}
+
+######################### check for outliers ######################### 
+task_df %>%
+  group_by(condition) %>%
+  identify_outliers(mt)
+
+######################### check normality ######################### 
+task_df %>%
+  group_by(condition) %>%
+  shapiro_test(mt)
+ggqqplot(task_df, "mt", facet.by = "condition")
+
+
+```
+
+
+## Fit Model
+
+```{r fit model}
+
+######################### Two-way mixed ANOVA test #########################  
+res.aov <- task_df %>% anova_test(mt ~ condition * posture)
+res.aov
+
+# pairwise comparisons
+pwc <- task_df %>%
+  pairwise_t_test(
+    mt ~ posture, paired = TRUE,
+    p.adjust.method = "holm"
+    )
+pwc
+
+# pairwise comparisons
+pwc <- task_df %>%
+  group_by(condition) %>%
+  pairwise_t_test(
+    mt ~ posture, paired = TRUE,
+    p.adjust.method = "holm"
+    )
+pwc
+
+
+# ###### kruskal-wallis test ######
+# res.kruskal <- task_df %>% kruskal_test(average_mt ~ condition)
+# res.kruskal
+# 
+# task_df %>% kruskal_effsize(average_mt ~ condition)
+
+
+
+```
+
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
