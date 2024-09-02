@@ -1,0 +1,94 @@
+---
+title: "p_trust"
+output: html_document
+date: "2023-09-19"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Analysis script for "
+
+```{r load libraries}
+library(readr)
+library(tidyverse)
+library(ggpubr)
+library(rstatix)
+library(stats)
+library(lme4)
+library(dplyr)
+library(ez)
+library(ltm)
+```
+
+
+## Extract dataframe from csv file and get (mean, sd) or (mean, se) summary
+
+```{r read csv}
+
+setwd("C:/Users/micha/OneDrive/My_GitHub_Repos/robot-x-ar/study2/data/task_performance/")
+task_df <- read_csv("learning.csv")
+
+
+######################### get mean and sd (or se) ######################### 
+task_df %>%
+  group_by(cond_order) %>%
+  get_summary_stats(time_diff, type = "mean_sd")
+
+
+```
+
+## Plots
+
+```{r do plotting}
+
+bxp <- ggboxplot(task_df, x = "cond_order", y = "time_diff", add = "jitter")
+bxp
+
+# ggexport(bxp, filename = "tlx.png")
+
+
+```
+
+
+## Check assumptions
+
+```{r check assumptions}
+
+######################### check for outliers ######################### 
+task_df %>%
+  group_by(cond_order) %>%
+  identify_outliers(time_diff)
+
+######################### check normality ######################### 
+task_df %>%
+  group_by(cond_order) %>%
+  shapiro_test(time_diff)
+ggqqplot(task_df, "time_diff", facet.by = "cond_order")
+
+
+```
+
+
+## Fit Model
+
+```{r fit model}
+
+############## Welch's T-test ##############
+stat.test <- task_df %>% 
+  # t_test(time_diff ~ cond_order, detailed = TRUE) %>%
+  t_test(time_diff ~ cond_order) %>%
+  add_significance()
+stat.test
+
+
+############# Cohen's d for calculating Effect Size #############
+task_df %>% cohens_d(time_diff ~ cond_order, var.equal = FALSE)
+
+
+
+```
+
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

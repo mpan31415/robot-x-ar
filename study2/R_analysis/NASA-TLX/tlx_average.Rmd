@@ -92,21 +92,28 @@ ggqqplot(form_df, "tlx_ave", facet.by = "condition")
 res.aov <- anova_test(data = form_df, dv = tlx_ave, wid = pid, within = condition)
 get_anova_table(res.aov)
 
-######################### Two-way mixed ANOVA test #########################  
-res.aov <- form_df %>% anova_test(tlx_ave ~ condition * cond_order)
-res.aov
+# ######################### Two-way mixed ANOVA test #########################  
+# res.aov <- form_df %>% anova_test(tlx_ave ~ condition * cond_order)
+# res.aov
+
+# Two-way mixed ANOVA test
+res.aov <- anova_test(
+  data = form_df, dv = tlx_ave, wid = pid,
+  between = cond_order, within = condition
+  )
+get_anova_table(res.aov)
 
 ######################### Two-way mixed ANOVA test #########################  
 res.aov <- form_df %>% anova_test(tlx_ave ~ condition * pose_order)
 res.aov
 
-# pairwise comparisons
-pwc <- form_df %>%
-  pairwise_t_test(
-    tlx_ave ~ condition, paired = TRUE,
-    p.adjust.method = "holm"
-    )
-pwc
+# # pairwise comparisons
+# pwc <- form_df %>%
+#   pairwise_t_test(
+#     tlx_ave ~ condition, paired = TRUE,
+#     p.adjust.method = "holm"
+#     )
+# pwc
 
 # pairwise comparisons
 pwc <- form_df %>%

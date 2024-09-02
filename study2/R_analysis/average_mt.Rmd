@@ -77,13 +77,20 @@ ggqqplot(task_df, "time", facet.by = "condition")
 
 ```{r fit model}
 
-######################### One-way mixed ANOVA test #########################  
+######################### One-way ANOVA test #########################  
 res.aov <- anova_test(data = task_df, dv = time, wid = pid, within = condition)
 get_anova_table(res.aov)
 
-######################### Two-way mixed ANOVA test #########################  
-res.aov <- task_df %>% anova_test(time ~ condition * cond_order)
-res.aov
+# ######################### Two-way mixed ANOVA test #########################  
+# res.aov <- task_df %>% anova_test(time ~ condition * cond_order)
+# res.aov
+
+# Two-way mixed ANOVA test
+res.aov <- anova_test(
+  data = task_df, dv = time, wid = pid,
+  between = cond_order, within = condition
+  )
+get_anova_table(res.aov)
 
 # pairwise comparisons
 pwc <- task_df %>%

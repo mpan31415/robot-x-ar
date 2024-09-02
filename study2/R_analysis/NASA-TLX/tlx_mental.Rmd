@@ -33,7 +33,14 @@ form_df <- read_csv("main_form_cleaned.csv")
 ######################### get mean and sd (or se) ######################### 
 form_df %>%
   group_by(condition) %>%
-  get_summary_stats(difficulty, type = "mean_sd")
+  get_summary_stats(tlx_mental, type = "mean_sd")
+
+
+tlx_dims_df <- data.frame(form_df$tlx_mental, form_df$tlx_physical, form_df$tlx_hurried, 
+                          form_df$tlx_successful, form_df$tlx_hard, form_df$tlx_insecure)
+
+######################### calculate Cronbach's Alpha with 95% confidence interval ######################### 
+cronbach.alpha(tlx_dims_df, CI=TRUE)
 
 
 ```
@@ -42,12 +49,18 @@ form_df %>%
 
 ```{r do plotting}
 
-bxp <- ggboxplot(form_df, x = "condition", y = "difficulty", add = "jitter")
+bxp <- ggboxplot(form_df, x = "condition", y = "tlx_mental", add = "jitter")
 bxp
 
-bxp <- ggboxplot(form_df, x = "cond_order", y = "difficulty", add = "jitter", color = "condition")
+bxp <- ggboxplot(form_df, x = "cond_order", y = "tlx_mental", add = "jitter", color = "condition")
 bxp
-# ggexport(bxp, filename = "difficulty.png")
+
+bxp <- ggboxplot(form_df, x = "pose_order", y = "tlx_mental", add = "jitter", color = "condition")
+bxp
+
+bxp <- ggboxplot(form_df, x = "pose_order", y = "tlx_mental", add = "jitter")
+bxp
+# ggexport(bxp, filename = "tlx_mental.png")
 
 ```
 
@@ -59,13 +72,13 @@ bxp
 ######################### check for outliers ######################### 
 form_df %>%
   group_by(condition) %>%
-  identify_outliers(difficulty)
+  identify_outliers(tlx_mental)
 
 ######################### check normality ######################### 
 form_df %>%
   group_by(condition) %>%
-  shapiro_test(difficulty)
-ggqqplot(form_df, "difficulty", facet.by = "condition")
+  shapiro_test(tlx_mental)
+ggqqplot(form_df, "tlx_mental", facet.by = "condition")
 
 
 ```
@@ -76,24 +89,28 @@ ggqqplot(form_df, "difficulty", facet.by = "condition")
 ```{r fit model}
 
 ######################### One-way mixed ANOVA test #########################  
-res.aov <- anova_test(data = form_df, dv = difficulty, wid = pid, within = condition)
+res.aov <- anova_test(data = form_df, dv = tlx_mental, wid = pid, within = condition)
 get_anova_table(res.aov)
 
-# ######################### Two-way mixed ANOVA test #########################
-# res.aov <- form_df %>% anova_test(difficulty ~ condition * cond_order)
+# ######################### Two-way mixed ANOVA test #########################  
+# res.aov <- form_df %>% anova_test(tlx_mental ~ condition * cond_order)
 # res.aov
 
 # Two-way mixed ANOVA test
 res.aov <- anova_test(
-  data = form_df, dv = difficulty, wid = pid,
+  data = form_df, dv = tlx_mental, wid = pid,
   between = cond_order, within = condition
   )
 get_anova_table(res.aov)
 
+######################### Two-way mixed ANOVA test #########################  
+res.aov <- form_df %>% anova_test(tlx_mental ~ condition * pose_order)
+res.aov
+
 # # pairwise comparisons
 # pwc <- form_df %>%
 #   pairwise_t_test(
-#     difficulty ~ condition, paired = TRUE,
+#     tlx_mental ~ condition, paired = TRUE,
 #     p.adjust.method = "holm"
 #     )
 # pwc
@@ -102,20 +119,21 @@ get_anova_table(res.aov)
 pwc <- form_df %>%
   group_by(cond_order) %>%
   pairwise_t_test(
-    difficulty ~ condition, paired = TRUE,
+    tlx_mental ~ condition, paired = TRUE,
     p.adjust.method = "holm"
     )
 pwc
 
 
 # ##### kruskal-wallis test
-# res.kruskal <- form_df %>% kruskal_test(difficulty ~ condition)
+# res.kruskal <- form_df %>% kruskal_test(tlx_mental ~ condition)
 # res.kruskal
 # 
-# form_df %>% kruskal_effsize(difficulty ~ condition)
+# form_df %>% kruskal_effsize(tlx_mental ~ condition)
 
 
 ```
+
 
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
