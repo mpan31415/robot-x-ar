@@ -62,6 +62,17 @@ bxp <- ggboxplot(form_df, x = "pose_order", y = "tlx_ave", add = "jitter")
 bxp
 # ggexport(bxp, filename = "tlx_ave.png")
 
+
+ggplot(task_df, aes(x = condition, y = tlx_ave, 
+                     shape = cond_order,
+                     group = cond_order,
+                     color = cond_order)) +
+  stat_summary(fun = "mean", geom = "point", size = 3) +
+  stat_summary(fun = "mean", geom = "line") +
+  stat_summary(fun.data = "mean_se", geom = "errorbar", width = .2) +
+  # scale_color_manual(values = c("blue", "darkorange")) +
+  theme_classic()
+
 ```
 
 
@@ -120,7 +131,7 @@ pwc <- form_df %>%
   group_by(cond_order) %>%
   pairwise_t_test(
     tlx_ave ~ condition, paired = TRUE,
-    p.adjust.method = "holm"
+    p.adjust.method = "holm", detailed = TRUE
     )
 pwc
 

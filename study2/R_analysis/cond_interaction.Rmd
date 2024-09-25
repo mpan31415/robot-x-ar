@@ -28,7 +28,7 @@ library(ltm)
 ```{r read csv}
 
 setwd("C:/Users/micha/OneDrive/My_GitHub_Repos/robot-x-ar/study2/data/")
-task_df <- read_csv("merged_all_data.csv")
+task_df <- read_csv("order_interaction.csv")
 
 
 ######################### get mean and sd (or se) ######################### 
@@ -46,17 +46,21 @@ task_df %>%
 bxp <- ggboxplot(task_df, x = "condition", y = "time", add = "jitter")
 bxp
 
-bxp <- ggboxplot(task_df, x = "cond_order", y = "time", add = "jitter", color = "condition")
+bxp <- ggboxplot(task_df, x = "condition", y = "time", add = "jitter", color = "order")
 bxp
 # ggexport(bxp, filename = "tlx.png")
 
+bxp <- ggboxplot(task_df, x = "order", y = "time", add = "jitter", color = "condition")
+bxp
 
-ggplot(task_df, aes(x = condition, y = time, 
-                     shape = cond_order,
-                     group = cond_order,
-                     color = cond_order)) +
+
+ggplot(task_df, aes(x = order, y = time, 
+                     shape = condition,
+                     group = condition,
+                     color = condition)) +
   stat_summary(fun = "mean", geom = "point", size = 3) +
   stat_summary(fun = "mean", geom = "line") +
+  # stat_summary(fun.data = "mean_se", geom = "point") +
   stat_summary(fun.data = "mean_se", geom = "errorbar", width = .2) +
   # scale_color_manual(values = c("blue", "darkorange")) +
   theme_classic()
@@ -92,16 +96,16 @@ ggqqplot(task_df, "time", facet.by = "condition")
 res.aov <- anova_test(data = task_df, dv = time, wid = pid, within = condition)
 get_anova_table(res.aov)
 
-# ######################### Two-way mixed ANOVA test #########################  
-# res.aov <- task_df %>% anova_test(time ~ condition * cond_order)
-# res.aov
+######################### Two-way mixed ANOVA test #########################
+res.aov <- task_df %>% anova_test(time ~ condition * order)
+res.aov
 
-# Two-way mixed ANOVA test
-res.aov <- anova_test(
-  data = task_df, dv = time, wid = pid,
-  between = cond_order, within = condition
-  )
-get_anova_table(res.aov)
+# # Two-way mixed ANOVA test
+# res.aov <- anova_test(
+#   data = task_df, dv = time, wid = pid,
+#   between = order, within = condition
+#   )
+# get_anova_table(res.aov)
 
 # pairwise comparisons
 pwc <- task_df %>%
@@ -113,7 +117,7 @@ pwc
 
 # pairwise comparisons
 pwc <- task_df %>%
-  group_by(cond_order) %>%
+  group_by(order) %>%
   pairwise_t_test(
     time ~ condition, paired = TRUE,
     p.adjust.method = "holm", detailed = TRUE

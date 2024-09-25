@@ -27,14 +27,14 @@ library(ltm)
 
 ```{r read csv}
 
-setwd("C:/Users/micha/OneDrive/My_GitHub_Repos/robot-x-ar/study2/data/")
-task_df <- read_csv("merged_all_data.csv")
+setwd("C:/Users/micha/OneDrive/My_GitHub_Repos/robot-x-ar/study2/data/task_performance/")
+task_df <- read_csv("movement_time_no_outlier.csv")
 
 
 ######################### get mean and sd (or se) ######################### 
 task_df %>%
   group_by(condition) %>%
-  get_summary_stats(time, type = "mean_sd")
+  get_summary_stats(mt, type = "mean_sd")
 
 
 ```
@@ -43,18 +43,18 @@ task_df %>%
 
 ```{r do plotting}
 
-bxp <- ggboxplot(task_df, x = "condition", y = "time", add = "jitter")
+bxp <- ggboxplot(task_df, x = "condition", y = "mt", add = "jitter")
 bxp
 
-bxp <- ggboxplot(task_df, x = "cond_order", y = "time", add = "jitter", color = "condition")
+bxp <- ggboxplot(task_df, x = "posture", y = "mt", add = "jitter", color = "condition")
 bxp
 # ggexport(bxp, filename = "tlx.png")
 
 
-ggplot(task_df, aes(x = condition, y = time, 
-                     shape = cond_order,
-                     group = cond_order,
-                     color = cond_order)) +
+ggplot(task_df, aes(x = condition, y = mt, 
+                     shape = posture,
+                     group = posture,
+                     color = posture)) +
   stat_summary(fun = "mean", geom = "point", size = 3) +
   stat_summary(fun = "mean", geom = "line") +
   stat_summary(fun.data = "mean_se", geom = "errorbar", width = .2) +
@@ -72,13 +72,13 @@ ggplot(task_df, aes(x = condition, y = time,
 ######################### check for outliers ######################### 
 task_df %>%
   group_by(condition) %>%
-  identify_outliers(time)
+  identify_outliers(mt)
 
 ######################### check normality ######################### 
 task_df %>%
   group_by(condition) %>%
-  shapiro_test(time)
-ggqqplot(task_df, "time", facet.by = "condition")
+  shapiro_test(mt)
+ggqqplot(task_df, "mt", facet.by = "condition")
 
 
 ```
@@ -88,25 +88,29 @@ ggqqplot(task_df, "time", facet.by = "condition")
 
 ```{r fit model}
 
-######################### One-way ANOVA test #########################  
-res.aov <- anova_test(data = task_df, dv = time, wid = pid, within = condition)
+# ######################### One-way ANOVA test #########################
+# res.aov <- anova_test(data = task_df, dv = mt, wid = pid, within = condition)
+# get_anova_table(res.aov)
+
+######################### Two-way ANOVA test #########################  
+res.aov <- anova_test(data = task_df, dv = mt, wid = pid, within = c(condition, posture))
 get_anova_table(res.aov)
 
 # ######################### Two-way mixed ANOVA test #########################  
-# res.aov <- task_df %>% anova_test(time ~ condition * cond_order)
+# res.aov <- task_df %>% anova_test(mt ~ condition * cond_order)
 # res.aov
 
-# Two-way mixed ANOVA test
-res.aov <- anova_test(
-  data = task_df, dv = time, wid = pid,
-  between = cond_order, within = condition
-  )
-get_anova_table(res.aov)
+# # Two-way mixed ANOVA test
+# res.aov <- anova_test(
+#   data = task_df, dv = mt, wid = pid,
+#   between = cond_order, within = condition
+#   )
+# get_anova_table(res.aov)
 
 # pairwise comparisons
 pwc <- task_df %>%
   pairwise_t_test(
-    time ~ condition, paired = TRUE,
+    mt ~ condition, paired = TRUE,
     p.adjust.method = "holm"
     )
 pwc
@@ -115,8 +119,8 @@ pwc
 pwc <- task_df %>%
   group_by(cond_order) %>%
   pairwise_t_test(
-    time ~ condition, paired = TRUE,
-    p.adjust.method = "holm", detailed = TRUE
+    mt ~ condition, paired = TRUE,
+    p.adjust.method = "holm"
     )
 pwc
 

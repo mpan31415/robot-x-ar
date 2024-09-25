@@ -49,6 +49,17 @@ bxp <- ggboxplot(form_df, x = "cond_order", y = "difficulty", add = "jitter", co
 bxp
 # ggexport(bxp, filename = "difficulty.png")
 
+
+ggplot(task_df, aes(x = condition, y = difficulty, 
+                     shape = cond_order,
+                     group = cond_order,
+                     color = cond_order)) +
+  stat_summary(fun = "mean", geom = "point", size = 3) +
+  stat_summary(fun = "mean", geom = "line") +
+  stat_summary(fun.data = "mean_se", geom = "errorbar", width = .2) +
+  # scale_color_manual(values = c("blue", "darkorange")) +
+  theme_classic()
+
 ```
 
 
@@ -103,7 +114,7 @@ pwc <- form_df %>%
   group_by(cond_order) %>%
   pairwise_t_test(
     difficulty ~ condition, paired = TRUE,
-    p.adjust.method = "holm"
+    p.adjust.method = "holm", detailed = TRUE
     )
 pwc
 

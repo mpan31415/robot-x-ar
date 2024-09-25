@@ -34,7 +34,7 @@ task_df <- read_csv("learning.csv")
 ######################### get mean and sd (or se) ######################### 
 task_df %>%
   group_by(cond_order) %>%
-  get_summary_stats(time_diff, type = "mean_sd")
+  get_summary_stats(time_diff_order, type = "mean_sd")
 
 
 ```
@@ -43,10 +43,14 @@ task_df %>%
 
 ```{r do plotting}
 
-bxp <- ggboxplot(task_df, x = "cond_order", y = "time_diff", add = "jitter")
+bxp <- ggboxplot(task_df, x = "cond_order", y = "time_diff_order", add = "jitter")
 bxp
 
 # ggexport(bxp, filename = "tlx.png")
+
+
+# bxp <- ggboxplot(task_df, x = "cond_order", y = "time_diff", add = "jitter")
+# bxp
 
 
 ```
@@ -59,13 +63,13 @@ bxp
 ######################### check for outliers ######################### 
 task_df %>%
   group_by(cond_order) %>%
-  identify_outliers(time_diff)
+  identify_outliers(time_diff_order)
 
 ######################### check normality ######################### 
 task_df %>%
   group_by(cond_order) %>%
-  shapiro_test(time_diff)
-ggqqplot(task_df, "time_diff", facet.by = "cond_order")
+  shapiro_test(time_diff_order)
+ggqqplot(task_df, "time_diff_order", facet.by = "cond_order")
 
 
 ```
@@ -77,14 +81,14 @@ ggqqplot(task_df, "time_diff", facet.by = "cond_order")
 
 ############## Welch's T-test ##############
 stat.test <- task_df %>% 
-  # t_test(time_diff ~ cond_order, detailed = TRUE) %>%
-  t_test(time_diff ~ cond_order) %>%
+  # t_test(time_diff_order ~ cond_order, detailed = TRUE) %>%
+  t_test(time_diff_order ~ cond_order) %>%
   add_significance()
 stat.test
 
 
 ############# Cohen's d for calculating Effect Size #############
-task_df %>% cohens_d(time_diff ~ cond_order, var.equal = FALSE)
+task_df %>% cohens_d(time_diff_order ~ cond_order, var.equal = FALSE)
 
 
 
