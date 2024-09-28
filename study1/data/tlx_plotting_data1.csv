@@ -1,0 +1,577 @@
+pid,condition,tlx_item,tlx_score
+1,Baseline,Mental Demand,15.0
+1,Baseline,Physical Demand,18.0
+1,Baseline,Temporal Demand,17.0
+1,Baseline,Performance,18.0
+1,Baseline,Effort,16.0
+1,Baseline,Frustration,18.0
+1,HumanHorizontal,Mental Demand,9.0
+1,HumanHorizontal,Physical Demand,11.0
+1,HumanHorizontal,Temporal Demand,9.0
+1,HumanHorizontal,Performance,10.0
+1,HumanHorizontal,Effort,10.0
+1,HumanHorizontal,Frustration,10.0
+1,RobotHorizontal,Mental Demand,7.0
+1,RobotHorizontal,Physical Demand,9.0
+1,RobotHorizontal,Temporal Demand,7.0
+1,RobotHorizontal,Performance,7.0
+1,RobotHorizontal,Effort,7.0
+1,RobotHorizontal,Frustration,7.0
+1,HumanVertical,Mental Demand,5.0
+1,HumanVertical,Physical Demand,5.0
+1,HumanVertical,Temporal Demand,4.0
+1,HumanVertical,Performance,2.0
+1,HumanVertical,Effort,5.0
+1,HumanVertical,Frustration,4.0
+2,HumanHorizontal,Mental Demand,2.0
+2,HumanHorizontal,Physical Demand,12.0
+2,HumanHorizontal,Temporal Demand,5.0
+2,HumanHorizontal,Performance,1.0
+2,HumanHorizontal,Effort,9.0
+2,HumanHorizontal,Frustration,5.0
+2,HumanVertical,Mental Demand,4.0
+2,HumanVertical,Physical Demand,6.0
+2,HumanVertical,Temporal Demand,4.0
+2,HumanVertical,Performance,1.0
+2,HumanVertical,Effort,8.0
+2,HumanVertical,Frustration,3.0
+2,Baseline,Mental Demand,8.0
+2,Baseline,Physical Demand,11.0
+2,Baseline,Temporal Demand,6.0
+2,Baseline,Performance,1.0
+2,Baseline,Effort,13.0
+2,Baseline,Frustration,7.0
+2,RobotHorizontal,Mental Demand,5.0
+2,RobotHorizontal,Physical Demand,5.0
+2,RobotHorizontal,Temporal Demand,3.0
+2,RobotHorizontal,Performance,1.0
+2,RobotHorizontal,Effort,12.0
+2,RobotHorizontal,Frustration,2.0
+3,HumanVertical,Mental Demand,10.0
+3,HumanVertical,Physical Demand,14.0
+3,HumanVertical,Temporal Demand,10.0
+3,HumanVertical,Performance,5.0
+3,HumanVertical,Effort,9.0
+3,HumanVertical,Frustration,1.0
+3,RobotHorizontal,Mental Demand,12.0
+3,RobotHorizontal,Physical Demand,9.0
+3,RobotHorizontal,Temporal Demand,11.0
+3,RobotHorizontal,Performance,3.0
+3,RobotHorizontal,Effort,8.0
+3,RobotHorizontal,Frustration,1.0
+3,HumanHorizontal,Mental Demand,5.0
+3,HumanHorizontal,Physical Demand,12.0
+3,HumanHorizontal,Temporal Demand,9.0
+3,HumanHorizontal,Performance,1.0
+3,HumanHorizontal,Effort,7.0
+3,HumanHorizontal,Frustration,1.0
+3,Baseline,Mental Demand,5.0
+3,Baseline,Physical Demand,7.0
+3,Baseline,Temporal Demand,9.0
+3,Baseline,Performance,1.0
+3,Baseline,Effort,8.0
+3,Baseline,Frustration,1.0
+4,RobotHorizontal,Mental Demand,16.0
+4,RobotHorizontal,Physical Demand,16.0
+4,RobotHorizontal,Temporal Demand,11.0
+4,RobotHorizontal,Performance,7.0
+4,RobotHorizontal,Effort,11.0
+4,RobotHorizontal,Frustration,18.0
+4,Baseline,Mental Demand,11.0
+4,Baseline,Physical Demand,13.0
+4,Baseline,Temporal Demand,3.0
+4,Baseline,Performance,13.0
+4,Baseline,Effort,11.0
+4,Baseline,Frustration,14.0
+4,HumanVertical,Mental Demand,9.0
+4,HumanVertical,Physical Demand,14.0
+4,HumanVertical,Temporal Demand,6.0
+4,HumanVertical,Performance,5.0
+4,HumanVertical,Effort,5.0
+4,HumanVertical,Frustration,7.0
+4,HumanHorizontal,Mental Demand,7.0
+4,HumanHorizontal,Physical Demand,10.0
+4,HumanHorizontal,Temporal Demand,4.0
+4,HumanHorizontal,Performance,5.0
+4,HumanHorizontal,Effort,9.0
+4,HumanHorizontal,Frustration,4.0
+5,Baseline,Mental Demand,18.0
+5,Baseline,Physical Demand,16.0
+5,Baseline,Temporal Demand,10.0
+5,Baseline,Performance,11.0
+5,Baseline,Effort,16.0
+5,Baseline,Frustration,18.0
+5,HumanHorizontal,Mental Demand,10.0
+5,HumanHorizontal,Physical Demand,12.0
+5,HumanHorizontal,Temporal Demand,10.0
+5,HumanHorizontal,Performance,10.0
+5,HumanHorizontal,Effort,10.0
+5,HumanHorizontal,Frustration,7.0
+5,HumanVertical,Mental Demand,3.0
+5,HumanVertical,Physical Demand,3.0
+5,HumanVertical,Temporal Demand,3.0
+5,HumanVertical,Performance,1.0
+5,HumanVertical,Effort,4.0
+5,HumanVertical,Frustration,20.0
+5,RobotHorizontal,Mental Demand,5.0
+5,RobotHorizontal,Physical Demand,9.0
+5,RobotHorizontal,Temporal Demand,5.0
+5,RobotHorizontal,Performance,1.0
+5,RobotHorizontal,Effort,9.0
+5,RobotHorizontal,Frustration,7.0
+6,Baseline,Mental Demand,12.0
+6,Baseline,Physical Demand,14.0
+6,Baseline,Temporal Demand,5.0
+6,Baseline,Performance,3.0
+6,Baseline,Effort,12.0
+6,Baseline,Frustration,1.0
+6,HumanVertical,Mental Demand,9.0
+6,HumanVertical,Physical Demand,12.0
+6,HumanVertical,Temporal Demand,3.0
+6,HumanVertical,Performance,3.0
+6,HumanVertical,Effort,12.0
+6,HumanVertical,Frustration,1.0
+6,HumanHorizontal,Mental Demand,8.0
+6,HumanHorizontal,Physical Demand,12.0
+6,HumanHorizontal,Temporal Demand,1.0
+6,HumanHorizontal,Performance,3.0
+6,HumanHorizontal,Effort,9.0
+6,HumanHorizontal,Frustration,1.0
+6,RobotHorizontal,Mental Demand,7.0
+6,RobotHorizontal,Physical Demand,8.0
+6,RobotHorizontal,Temporal Demand,1.0
+6,RobotHorizontal,Performance,3.0
+6,RobotHorizontal,Effort,9.0
+6,RobotHorizontal,Frustration,1.0
+7,Baseline,Mental Demand,3.0
+7,Baseline,Physical Demand,7.0
+7,Baseline,Temporal Demand,12.0
+7,Baseline,Performance,3.0
+7,Baseline,Effort,11.0
+7,Baseline,Frustration,2.0
+7,HumanVertical,Mental Demand,4.0
+7,HumanVertical,Physical Demand,4.0
+7,HumanVertical,Temporal Demand,3.0
+7,HumanVertical,Performance,5.0
+7,HumanVertical,Effort,3.0
+7,HumanVertical,Frustration,2.0
+7,RobotHorizontal,Mental Demand,3.0
+7,RobotHorizontal,Physical Demand,3.0
+7,RobotHorizontal,Temporal Demand,3.0
+7,RobotHorizontal,Performance,2.0
+7,RobotHorizontal,Effort,20.0
+7,RobotHorizontal,Frustration,2.0
+7,HumanHorizontal,Mental Demand,2.0
+7,HumanHorizontal,Physical Demand,4.0
+7,HumanHorizontal,Temporal Demand,3.0
+7,HumanHorizontal,Performance,2.0
+7,HumanHorizontal,Effort,1.0
+7,HumanHorizontal,Frustration,19.0
+8,Baseline,Mental Demand,11.0
+8,Baseline,Physical Demand,12.0
+8,Baseline,Temporal Demand,15.0
+8,Baseline,Performance,15.0
+8,Baseline,Effort,13.0
+8,Baseline,Frustration,15.0
+8,RobotHorizontal,Mental Demand,11.0
+8,RobotHorizontal,Physical Demand,11.0
+8,RobotHorizontal,Temporal Demand,11.0
+8,RobotHorizontal,Performance,12.0
+8,RobotHorizontal,Effort,11.0
+8,RobotHorizontal,Frustration,10.0
+8,HumanHorizontal,Mental Demand,10.0
+8,HumanHorizontal,Physical Demand,10.0
+8,HumanHorizontal,Temporal Demand,9.0
+8,HumanHorizontal,Performance,9.0
+8,HumanHorizontal,Effort,12.0
+8,HumanHorizontal,Frustration,8.0
+8,HumanVertical,Mental Demand,12.0
+8,HumanVertical,Physical Demand,12.0
+8,HumanVertical,Temporal Demand,12.0
+8,HumanVertical,Performance,8.0
+8,HumanVertical,Effort,8.0
+8,HumanVertical,Frustration,11.0
+9,Baseline,Mental Demand,10.0
+9,Baseline,Physical Demand,12.0
+9,Baseline,Temporal Demand,1.0
+9,Baseline,Performance,3.0
+9,Baseline,Effort,8.0
+9,Baseline,Frustration,10.0
+9,RobotHorizontal,Mental Demand,10.0
+9,RobotHorizontal,Physical Demand,20.0
+9,RobotHorizontal,Temporal Demand,4.0
+9,RobotHorizontal,Performance,13.0
+9,RobotHorizontal,Effort,16.0
+9,RobotHorizontal,Frustration,6.0
+9,HumanVertical,Mental Demand,16.0
+9,HumanVertical,Physical Demand,20.0
+9,HumanVertical,Temporal Demand,3.0
+9,HumanVertical,Performance,11.0
+9,HumanVertical,Effort,20.0
+9,HumanVertical,Frustration,5.0
+9,HumanHorizontal,Mental Demand,5.0
+9,HumanHorizontal,Physical Demand,11.0
+9,HumanHorizontal,Temporal Demand,11.0
+9,HumanHorizontal,Performance,13.0
+9,HumanHorizontal,Effort,7.0
+9,HumanHorizontal,Frustration,5.0
+10,HumanHorizontal,Mental Demand,16.0
+10,HumanHorizontal,Physical Demand,10.0
+10,HumanHorizontal,Temporal Demand,3.0
+10,HumanHorizontal,Performance,7.0
+10,HumanHorizontal,Effort,8.0
+10,HumanHorizontal,Frustration,5.0
+10,Baseline,Mental Demand,16.0
+10,Baseline,Physical Demand,9.0
+10,Baseline,Temporal Demand,8.0
+10,Baseline,Performance,5.0
+10,Baseline,Effort,3.0
+10,Baseline,Frustration,2.0
+10,HumanVertical,Mental Demand,12.0
+10,HumanVertical,Physical Demand,9.0
+10,HumanVertical,Temporal Demand,8.0
+10,HumanVertical,Performance,3.0
+10,HumanVertical,Effort,3.0
+10,HumanVertical,Frustration,2.0
+10,RobotHorizontal,Mental Demand,7.0
+10,RobotHorizontal,Physical Demand,12.0
+10,RobotHorizontal,Temporal Demand,5.0
+10,RobotHorizontal,Performance,2.0
+10,RobotHorizontal,Effort,1.0
+10,RobotHorizontal,Frustration,1.0
+11,HumanHorizontal,Mental Demand,3.0
+11,HumanHorizontal,Physical Demand,11.0
+11,HumanHorizontal,Temporal Demand,3.0
+11,HumanHorizontal,Performance,3.0
+11,HumanHorizontal,Effort,7.0
+11,HumanHorizontal,Frustration,2.0
+11,Baseline,Mental Demand,3.0
+11,Baseline,Physical Demand,12.0
+11,Baseline,Temporal Demand,3.0
+11,Baseline,Performance,7.0
+11,Baseline,Effort,9.0
+11,Baseline,Frustration,2.0
+11,RobotHorizontal,Mental Demand,3.0
+11,RobotHorizontal,Physical Demand,12.0
+11,RobotHorizontal,Temporal Demand,3.0
+11,RobotHorizontal,Performance,5.0
+11,RobotHorizontal,Effort,8.0
+11,RobotHorizontal,Frustration,3.0
+11,HumanVertical,Mental Demand,2.0
+11,HumanVertical,Physical Demand,5.0
+11,HumanVertical,Temporal Demand,2.0
+11,HumanVertical,Performance,3.0
+11,HumanVertical,Effort,5.0
+11,HumanVertical,Frustration,2.0
+12,HumanHorizontal,Mental Demand,16.0
+12,HumanHorizontal,Physical Demand,16.0
+12,HumanHorizontal,Temporal Demand,9.0
+12,HumanHorizontal,Performance,5.0
+12,HumanHorizontal,Effort,14.0
+12,HumanHorizontal,Frustration,5.0
+12,HumanVertical,Mental Demand,9.0
+12,HumanVertical,Physical Demand,9.0
+12,HumanVertical,Temporal Demand,7.0
+12,HumanVertical,Performance,5.0
+12,HumanVertical,Effort,9.0
+12,HumanVertical,Frustration,1.0
+12,RobotHorizontal,Mental Demand,6.0
+12,RobotHorizontal,Physical Demand,7.0
+12,RobotHorizontal,Temporal Demand,2.0
+12,RobotHorizontal,Performance,5.0
+12,RobotHorizontal,Effort,5.0
+12,RobotHorizontal,Frustration,1.0
+12,Baseline,Mental Demand,2.0
+12,Baseline,Physical Demand,9.0
+12,Baseline,Temporal Demand,2.0
+12,Baseline,Performance,5.0
+12,Baseline,Effort,5.0
+12,Baseline,Frustration,2.0
+13,HumanHorizontal,Mental Demand,9.0
+13,HumanHorizontal,Physical Demand,11.0
+13,HumanHorizontal,Temporal Demand,14.0
+13,HumanHorizontal,Performance,12.0
+13,HumanHorizontal,Effort,14.0
+13,HumanHorizontal,Frustration,3.0
+13,RobotHorizontal,Mental Demand,7.0
+13,RobotHorizontal,Physical Demand,4.0
+13,RobotHorizontal,Temporal Demand,7.0
+13,RobotHorizontal,Performance,9.0
+13,RobotHorizontal,Effort,7.0
+13,RobotHorizontal,Frustration,5.0
+13,Baseline,Mental Demand,5.0
+13,Baseline,Physical Demand,6.0
+13,Baseline,Temporal Demand,3.0
+13,Baseline,Performance,8.0
+13,Baseline,Effort,12.0
+13,Baseline,Frustration,3.0
+13,HumanVertical,Mental Demand,3.0
+13,HumanVertical,Physical Demand,5.0
+13,HumanVertical,Temporal Demand,3.0
+13,HumanVertical,Performance,6.0
+13,HumanVertical,Effort,5.0
+13,HumanVertical,Frustration,3.0
+14,HumanHorizontal,Mental Demand,7.0
+14,HumanHorizontal,Physical Demand,12.0
+14,HumanHorizontal,Temporal Demand,3.0
+14,HumanHorizontal,Performance,1.0
+14,HumanHorizontal,Effort,11.0
+14,HumanHorizontal,Frustration,5.0
+14,RobotHorizontal,Mental Demand,3.0
+14,RobotHorizontal,Physical Demand,10.0
+14,RobotHorizontal,Temporal Demand,5.0
+14,RobotHorizontal,Performance,1.0
+14,RobotHorizontal,Effort,6.0
+14,RobotHorizontal,Frustration,3.0
+14,HumanVertical,Mental Demand,5.0
+14,HumanVertical,Physical Demand,8.0
+14,HumanVertical,Temporal Demand,5.0
+14,HumanVertical,Performance,14.0
+14,HumanVertical,Effort,5.0
+14,HumanVertical,Frustration,3.0
+14,Baseline,Mental Demand,3.0
+14,Baseline,Physical Demand,5.0
+14,Baseline,Temporal Demand,2.0
+14,Baseline,Performance,1.0
+14,Baseline,Effort,4.0
+14,Baseline,Frustration,2.0
+15,HumanVertical,Mental Demand,8.0
+15,HumanVertical,Physical Demand,15.0
+15,HumanVertical,Temporal Demand,11.0
+15,HumanVertical,Performance,6.0
+15,HumanVertical,Effort,13.0
+15,HumanVertical,Frustration,6.0
+15,Baseline,Mental Demand,18.0
+15,Baseline,Physical Demand,16.0
+15,Baseline,Temporal Demand,16.0
+15,Baseline,Performance,6.0
+15,Baseline,Effort,14.0
+15,Baseline,Frustration,15.0
+15,HumanHorizontal,Mental Demand,17.0
+15,HumanHorizontal,Physical Demand,13.0
+15,HumanHorizontal,Temporal Demand,15.0
+15,HumanHorizontal,Performance,6.0
+15,HumanHorizontal,Effort,16.0
+15,HumanHorizontal,Frustration,15.0
+15,RobotHorizontal,Mental Demand,9.0
+15,RobotHorizontal,Physical Demand,14.0
+15,RobotHorizontal,Temporal Demand,14.0
+15,RobotHorizontal,Performance,9.0
+15,RobotHorizontal,Effort,14.0
+15,RobotHorizontal,Frustration,10.0
+16,HumanVertical,Mental Demand,13.0
+16,HumanVertical,Physical Demand,11.0
+16,HumanVertical,Temporal Demand,9.0
+16,HumanVertical,Performance,6.0
+16,HumanVertical,Effort,9.0
+16,HumanVertical,Frustration,3.0
+16,Baseline,Mental Demand,6.0
+16,Baseline,Physical Demand,12.0
+16,Baseline,Temporal Demand,14.0
+16,Baseline,Performance,4.0
+16,Baseline,Effort,4.0
+16,Baseline,Frustration,1.0
+16,RobotHorizontal,Mental Demand,4.0
+16,RobotHorizontal,Physical Demand,13.0
+16,RobotHorizontal,Temporal Demand,14.0
+16,RobotHorizontal,Performance,3.0
+16,RobotHorizontal,Effort,2.0
+16,RobotHorizontal,Frustration,2.0
+16,HumanHorizontal,Mental Demand,2.0
+16,HumanHorizontal,Physical Demand,10.0
+16,HumanHorizontal,Temporal Demand,2.0
+16,HumanHorizontal,Performance,2.0
+16,HumanHorizontal,Effort,2.0
+16,HumanHorizontal,Frustration,1.0
+17,HumanVertical,Mental Demand,7.0
+17,HumanVertical,Physical Demand,13.0
+17,HumanVertical,Temporal Demand,13.0
+17,HumanVertical,Performance,4.0
+17,HumanVertical,Effort,9.0
+17,HumanVertical,Frustration,7.0
+17,HumanHorizontal,Mental Demand,15.0
+17,HumanHorizontal,Physical Demand,18.0
+17,HumanHorizontal,Temporal Demand,10.0
+17,HumanHorizontal,Performance,8.0
+17,HumanHorizontal,Effort,18.0
+17,HumanHorizontal,Frustration,13.0
+17,Baseline,Mental Demand,10.0
+17,Baseline,Physical Demand,7.0
+17,Baseline,Temporal Demand,13.0
+17,Baseline,Performance,6.0
+17,Baseline,Effort,5.0
+17,Baseline,Frustration,5.0
+17,RobotHorizontal,Mental Demand,18.0
+17,RobotHorizontal,Physical Demand,16.0
+17,RobotHorizontal,Temporal Demand,17.0
+17,RobotHorizontal,Performance,8.0
+17,RobotHorizontal,Effort,8.0
+17,RobotHorizontal,Frustration,18.0
+18,HumanVertical,Mental Demand,5.0
+18,HumanVertical,Physical Demand,7.0
+18,HumanVertical,Temporal Demand,6.0
+18,HumanVertical,Performance,7.0
+18,HumanVertical,Effort,7.0
+18,HumanVertical,Frustration,4.0
+18,HumanHorizontal,Mental Demand,4.0
+18,HumanHorizontal,Physical Demand,4.0
+18,HumanHorizontal,Temporal Demand,8.0
+18,HumanHorizontal,Performance,7.0
+18,HumanHorizontal,Effort,6.0
+18,HumanHorizontal,Frustration,5.0
+18,RobotHorizontal,Mental Demand,4.0
+18,RobotHorizontal,Physical Demand,4.0
+18,RobotHorizontal,Temporal Demand,4.0
+18,RobotHorizontal,Performance,5.0
+18,RobotHorizontal,Effort,16.0
+18,RobotHorizontal,Frustration,4.0
+18,Baseline,Mental Demand,2.0
+18,Baseline,Physical Demand,2.0
+18,Baseline,Temporal Demand,2.0
+18,Baseline,Performance,3.0
+18,Baseline,Effort,4.0
+18,Baseline,Frustration,2.0
+19,HumanVertical,Mental Demand,4.0
+19,HumanVertical,Physical Demand,10.0
+19,HumanVertical,Temporal Demand,5.0
+19,HumanVertical,Performance,6.0
+19,HumanVertical,Effort,8.0
+19,HumanVertical,Frustration,2.0
+19,RobotHorizontal,Mental Demand,3.0
+19,RobotHorizontal,Physical Demand,5.0
+19,RobotHorizontal,Temporal Demand,3.0
+19,RobotHorizontal,Performance,3.0
+19,RobotHorizontal,Effort,5.0
+19,RobotHorizontal,Frustration,1.0
+19,HumanHorizontal,Mental Demand,1.0
+19,HumanHorizontal,Physical Demand,3.0
+19,HumanHorizontal,Temporal Demand,1.0
+19,HumanHorizontal,Performance,2.0
+19,HumanHorizontal,Effort,3.0
+19,HumanHorizontal,Frustration,1.0
+19,Baseline,Mental Demand,2.0
+19,Baseline,Physical Demand,3.0
+19,Baseline,Temporal Demand,1.0
+19,Baseline,Performance,2.0
+19,Baseline,Effort,3.0
+19,Baseline,Frustration,1.0
+20,RobotHorizontal,Mental Demand,10.0
+20,RobotHorizontal,Physical Demand,12.0
+20,RobotHorizontal,Temporal Demand,3.0
+20,RobotHorizontal,Performance,7.0
+20,RobotHorizontal,Effort,5.0
+20,RobotHorizontal,Frustration,1.0
+20,Baseline,Mental Demand,7.0
+20,Baseline,Physical Demand,14.0
+20,Baseline,Temporal Demand,5.0
+20,Baseline,Performance,9.0
+20,Baseline,Effort,12.0
+20,Baseline,Frustration,5.0
+20,HumanHorizontal,Mental Demand,5.0
+20,HumanHorizontal,Physical Demand,14.0
+20,HumanHorizontal,Temporal Demand,7.0
+20,HumanHorizontal,Performance,9.0
+20,HumanHorizontal,Effort,14.0
+20,HumanHorizontal,Frustration,5.0
+20,HumanVertical,Mental Demand,5.0
+20,HumanVertical,Physical Demand,12.0
+20,HumanVertical,Temporal Demand,5.0
+20,HumanVertical,Performance,9.0
+20,HumanVertical,Effort,5.0
+20,HumanVertical,Frustration,5.0
+21,RobotHorizontal,Mental Demand,6.0
+21,RobotHorizontal,Physical Demand,10.0
+21,RobotHorizontal,Temporal Demand,5.0
+21,RobotHorizontal,Performance,6.0
+21,RobotHorizontal,Effort,8.0
+21,RobotHorizontal,Frustration,5.0
+21,HumanVertical,Mental Demand,2.0
+21,HumanVertical,Physical Demand,5.0
+21,HumanVertical,Temporal Demand,2.0
+21,HumanVertical,Performance,3.0
+21,HumanVertical,Effort,3.0
+21,HumanVertical,Frustration,1.0
+21,Baseline,Mental Demand,2.0
+21,Baseline,Physical Demand,2.0
+21,Baseline,Temporal Demand,1.0
+21,Baseline,Performance,2.0
+21,Baseline,Effort,2.0
+21,Baseline,Frustration,1.0
+21,HumanHorizontal,Mental Demand,1.0
+21,HumanHorizontal,Physical Demand,2.0
+21,HumanHorizontal,Temporal Demand,1.0
+21,HumanHorizontal,Performance,1.0
+21,HumanHorizontal,Effort,1.0
+21,HumanHorizontal,Frustration,1.0
+22,RobotHorizontal,Mental Demand,12.0
+22,RobotHorizontal,Physical Demand,13.0
+22,RobotHorizontal,Temporal Demand,6.0
+22,RobotHorizontal,Performance,4.0
+22,RobotHorizontal,Effort,5.0
+22,RobotHorizontal,Frustration,5.0
+22,HumanHorizontal,Mental Demand,2.0
+22,HumanHorizontal,Physical Demand,4.0
+22,HumanHorizontal,Temporal Demand,3.0
+22,HumanHorizontal,Performance,3.0
+22,HumanHorizontal,Effort,4.0
+22,HumanHorizontal,Frustration,3.0
+22,Baseline,Mental Demand,7.0
+22,Baseline,Physical Demand,5.0
+22,Baseline,Temporal Demand,3.0
+22,Baseline,Performance,2.0
+22,Baseline,Effort,3.0
+22,Baseline,Frustration,2.0
+22,HumanVertical,Mental Demand,4.0
+22,HumanVertical,Physical Demand,2.0
+22,HumanVertical,Temporal Demand,3.0
+22,HumanVertical,Performance,18.0
+22,HumanVertical,Effort,3.0
+22,HumanVertical,Frustration,3.0
+23,RobotHorizontal,Mental Demand,18.0
+23,RobotHorizontal,Physical Demand,14.0
+23,RobotHorizontal,Temporal Demand,5.0
+23,RobotHorizontal,Performance,7.0
+23,RobotHorizontal,Effort,14.0
+23,RobotHorizontal,Frustration,12.0
+23,HumanHorizontal,Mental Demand,10.0
+23,HumanHorizontal,Physical Demand,7.0
+23,HumanHorizontal,Temporal Demand,2.0
+23,HumanHorizontal,Performance,1.0
+23,HumanHorizontal,Effort,1.0
+23,HumanHorizontal,Frustration,2.0
+23,HumanVertical,Mental Demand,1.0
+23,HumanVertical,Physical Demand,2.0
+23,HumanVertical,Temporal Demand,1.0
+23,HumanVertical,Performance,20.0
+23,HumanVertical,Effort,1.0
+23,HumanVertical,Frustration,1.0
+23,Baseline,Mental Demand,2.0
+23,Baseline,Physical Demand,1.0
+23,Baseline,Temporal Demand,1.0
+23,Baseline,Performance,1.0
+23,Baseline,Effort,2.0
+23,Baseline,Frustration,1.0
+24,RobotHorizontal,Mental Demand,12.0
+24,RobotHorizontal,Physical Demand,20.0
+24,RobotHorizontal,Temporal Demand,4.0
+24,RobotHorizontal,Performance,3.0
+24,RobotHorizontal,Effort,16.0
+24,RobotHorizontal,Frustration,12.0
+24,HumanVertical,Mental Demand,11.0
+24,HumanVertical,Physical Demand,14.0
+24,HumanVertical,Temporal Demand,1.0
+24,HumanVertical,Performance,1.0
+24,HumanVertical,Effort,11.0
+24,HumanVertical,Frustration,9.0
+24,HumanHorizontal,Mental Demand,11.0
+24,HumanHorizontal,Physical Demand,14.0
+24,HumanHorizontal,Temporal Demand,1.0
+24,HumanHorizontal,Performance,3.0
+24,HumanHorizontal,Effort,8.0
+24,HumanHorizontal,Frustration,5.0
+24,Baseline,Mental Demand,8.0
+24,Baseline,Physical Demand,13.0
+24,Baseline,Temporal Demand,1.0
+24,Baseline,Performance,2.0
+24,Baseline,Effort,16.0
+24,Baseline,Frustration,14.0

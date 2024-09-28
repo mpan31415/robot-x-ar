@@ -1,0 +1,289 @@
+pid,condition,tlx_item,tlx_score
+1,Viz,Mental Demand,4.0
+1,Viz,Physical Demand,2.0
+1,Viz,Temporal Demand,1.0
+1,Viz,Performance,3.0
+1,Viz,Effort,3.0
+1,Viz,Frustration,2.0
+1,No Viz,Mental Demand,2.0
+1,No Viz,Physical Demand,2.0
+1,No Viz,Temporal Demand,1.0
+1,No Viz,Performance,2.0
+1,No Viz,Effort,1.0
+1,No Viz,Frustration,1.0
+2,Viz,Mental Demand,5.0
+2,Viz,Physical Demand,5.0
+2,Viz,Temporal Demand,7.0
+2,Viz,Performance,12.0
+2,Viz,Effort,6.0
+2,Viz,Frustration,3.0
+2,No Viz,Mental Demand,9.0
+2,No Viz,Physical Demand,13.0
+2,No Viz,Temporal Demand,10.0
+2,No Viz,Performance,11.0
+2,No Viz,Effort,13.0
+2,No Viz,Frustration,12.0
+3,Viz,Mental Demand,8.0
+3,Viz,Physical Demand,3.0
+3,Viz,Temporal Demand,3.0
+3,Viz,Performance,11.0
+3,Viz,Effort,5.0
+3,Viz,Frustration,2.0
+3,No Viz,Mental Demand,5.0
+3,No Viz,Physical Demand,3.0
+3,No Viz,Temporal Demand,3.0
+3,No Viz,Performance,11.0
+3,No Viz,Effort,3.0
+3,No Viz,Frustration,3.0
+4,Viz,Mental Demand,8.0
+4,Viz,Physical Demand,10.0
+4,Viz,Temporal Demand,8.0
+4,Viz,Performance,10.0
+4,Viz,Effort,9.0
+4,Viz,Frustration,6.0
+4,No Viz,Mental Demand,3.0
+4,No Viz,Physical Demand,3.0
+4,No Viz,Temporal Demand,9.0
+4,No Viz,Performance,5.0
+4,No Viz,Effort,14.0
+4,No Viz,Frustration,2.0
+5,No Viz,Mental Demand,1.0
+5,No Viz,Physical Demand,5.0
+5,No Viz,Temporal Demand,9.0
+5,No Viz,Performance,20.0
+5,No Viz,Effort,5.0
+5,No Viz,Frustration,1.0
+5,Viz,Mental Demand,1.0
+5,Viz,Physical Demand,10.0
+5,Viz,Temporal Demand,3.0
+5,Viz,Performance,3.0
+5,Viz,Effort,6.0
+5,Viz,Frustration,1.0
+6,No Viz,Mental Demand,14.0
+6,No Viz,Physical Demand,11.0
+6,No Viz,Temporal Demand,7.0
+6,No Viz,Performance,5.0
+6,No Viz,Effort,10.0
+6,No Viz,Frustration,9.0
+6,Viz,Mental Demand,15.0
+6,Viz,Physical Demand,15.0
+6,Viz,Temporal Demand,8.0
+6,Viz,Performance,6.0
+6,Viz,Effort,16.0
+6,Viz,Frustration,14.0
+7,No Viz,Mental Demand,9.0
+7,No Viz,Physical Demand,12.0
+7,No Viz,Temporal Demand,3.0
+7,No Viz,Performance,6.0
+7,No Viz,Effort,16.0
+7,No Viz,Frustration,9.0
+7,Viz,Mental Demand,12.0
+7,Viz,Physical Demand,10.0
+7,Viz,Temporal Demand,6.0
+7,Viz,Performance,13.0
+7,Viz,Effort,11.0
+7,Viz,Frustration,10.0
+8,No Viz,Mental Demand,8.0
+8,No Viz,Physical Demand,6.0
+8,No Viz,Temporal Demand,6.0
+8,No Viz,Performance,7.0
+8,No Viz,Effort,6.0
+8,No Viz,Frustration,2.0
+8,Viz,Mental Demand,2.0
+8,Viz,Physical Demand,2.0
+8,Viz,Temporal Demand,3.0
+8,Viz,Performance,4.0
+8,Viz,Effort,1.0
+8,Viz,Frustration,1.0
+9,Viz,Mental Demand,20.0
+9,Viz,Physical Demand,18.0
+9,Viz,Temporal Demand,11.0
+9,Viz,Performance,16.0
+9,Viz,Effort,20.0
+9,Viz,Frustration,20.0
+9,No Viz,Mental Demand,15.0
+9,No Viz,Physical Demand,19.0
+9,No Viz,Temporal Demand,11.0
+9,No Viz,Performance,10.0
+9,No Viz,Effort,16.0
+9,No Viz,Frustration,17.0
+10,Viz,Mental Demand,12.0
+10,Viz,Physical Demand,9.0
+10,Viz,Temporal Demand,7.0
+10,Viz,Performance,1.0
+10,Viz,Effort,12.0
+10,Viz,Frustration,9.0
+10,No Viz,Mental Demand,16.0
+10,No Viz,Physical Demand,18.0
+10,No Viz,Temporal Demand,7.0
+10,No Viz,Performance,3.0
+10,No Viz,Effort,14.0
+10,No Viz,Frustration,12.0
+11,Viz,Mental Demand,10.0
+11,Viz,Physical Demand,5.0
+11,Viz,Temporal Demand,2.0
+11,Viz,Performance,10.0
+11,Viz,Effort,14.0
+11,Viz,Frustration,2.0
+11,No Viz,Mental Demand,4.0
+11,No Viz,Physical Demand,2.0
+11,No Viz,Temporal Demand,1.0
+11,No Viz,Performance,6.0
+11,No Viz,Effort,5.0
+11,No Viz,Frustration,1.0
+12,No Viz,Mental Demand,7.0
+12,No Viz,Physical Demand,9.0
+12,No Viz,Temporal Demand,1.0
+12,No Viz,Performance,2.0
+12,No Viz,Effort,7.0
+12,No Viz,Frustration,3.0
+12,Viz,Mental Demand,2.0
+12,Viz,Physical Demand,9.0
+12,Viz,Temporal Demand,3.0
+12,Viz,Performance,2.0
+12,Viz,Effort,2.0
+12,Viz,Frustration,1.0
+13,No Viz,Mental Demand,10.0
+13,No Viz,Physical Demand,10.0
+13,No Viz,Temporal Demand,7.0
+13,No Viz,Performance,14.0
+13,No Viz,Effort,10.0
+13,No Viz,Frustration,5.0
+13,Viz,Mental Demand,5.0
+13,Viz,Physical Demand,5.0
+13,Viz,Temporal Demand,5.0
+13,Viz,Performance,11.0
+13,Viz,Effort,5.0
+13,Viz,Frustration,4.0
+14,No Viz,Mental Demand,10.0
+14,No Viz,Physical Demand,9.0
+14,No Viz,Temporal Demand,7.0
+14,No Viz,Performance,15.0
+14,No Viz,Effort,16.0
+14,No Viz,Frustration,10.0
+14,Viz,Mental Demand,9.0
+14,Viz,Physical Demand,9.0
+14,Viz,Temporal Demand,6.0
+14,Viz,Performance,5.0
+14,Viz,Effort,6.0
+14,Viz,Frustration,6.0
+15,Viz,Mental Demand,5.0
+15,Viz,Physical Demand,5.0
+15,Viz,Temporal Demand,3.0
+15,Viz,Performance,1.0
+15,Viz,Effort,4.0
+15,Viz,Frustration,4.0
+15,No Viz,Mental Demand,10.0
+15,No Viz,Physical Demand,10.0
+15,No Viz,Temporal Demand,8.0
+15,No Viz,Performance,1.0
+15,No Viz,Effort,10.0
+15,No Viz,Frustration,7.0
+16,Viz,Mental Demand,11.0
+16,Viz,Physical Demand,7.0
+16,Viz,Temporal Demand,5.0
+16,Viz,Performance,5.0
+16,Viz,Effort,8.0
+16,Viz,Frustration,5.0
+16,No Viz,Mental Demand,17.0
+16,No Viz,Physical Demand,12.0
+16,No Viz,Temporal Demand,9.0
+16,No Viz,Performance,7.0
+16,No Viz,Effort,14.0
+16,No Viz,Frustration,7.0
+17,Viz,Mental Demand,9.0
+17,Viz,Physical Demand,18.0
+17,Viz,Temporal Demand,7.0
+17,Viz,Performance,3.0
+17,Viz,Effort,14.0
+17,Viz,Frustration,3.0
+17,No Viz,Mental Demand,3.0
+17,No Viz,Physical Demand,18.0
+17,No Viz,Temporal Demand,7.0
+17,No Viz,Performance,5.0
+17,No Viz,Effort,18.0
+17,No Viz,Frustration,5.0
+18,Viz,Mental Demand,9.0
+18,Viz,Physical Demand,3.0
+18,Viz,Temporal Demand,3.0
+18,Viz,Performance,5.0
+18,Viz,Effort,5.0
+18,Viz,Frustration,2.0
+18,No Viz,Mental Demand,7.0
+18,No Viz,Physical Demand,6.0
+18,No Viz,Temporal Demand,4.0
+18,No Viz,Performance,7.0
+18,No Viz,Effort,10.0
+18,No Viz,Frustration,3.0
+19,Viz,Mental Demand,9.0
+19,Viz,Physical Demand,8.0
+19,Viz,Temporal Demand,10.0
+19,Viz,Performance,7.0
+19,Viz,Effort,10.0
+19,Viz,Frustration,7.0
+19,No Viz,Mental Demand,7.0
+19,No Viz,Physical Demand,12.0
+19,No Viz,Temporal Demand,8.0
+19,No Viz,Performance,7.0
+19,No Viz,Effort,10.0
+19,No Viz,Frustration,15.0
+20,Viz,Mental Demand,16.0
+20,Viz,Physical Demand,17.0
+20,Viz,Temporal Demand,8.0
+20,Viz,Performance,8.0
+20,Viz,Effort,17.0
+20,Viz,Frustration,16.0
+20,No Viz,Mental Demand,18.0
+20,No Viz,Physical Demand,17.0
+20,No Viz,Temporal Demand,4.0
+20,No Viz,Performance,10.0
+20,No Viz,Effort,17.0
+20,No Viz,Frustration,17.0
+21,Viz,Mental Demand,5.0
+21,Viz,Physical Demand,15.0
+21,Viz,Temporal Demand,7.0
+21,Viz,Performance,9.0
+21,Viz,Effort,13.0
+21,Viz,Frustration,3.0
+21,No Viz,Mental Demand,9.0
+21,No Viz,Physical Demand,17.0
+21,No Viz,Temporal Demand,7.0
+21,No Viz,Performance,11.0
+21,No Viz,Effort,13.0
+21,No Viz,Frustration,12.0
+22,No Viz,Mental Demand,16.0
+22,No Viz,Physical Demand,10.0
+22,No Viz,Temporal Demand,1.0
+22,No Viz,Performance,14.0
+22,No Viz,Effort,12.0
+22,No Viz,Frustration,11.0
+22,Viz,Mental Demand,8.0
+22,Viz,Physical Demand,7.0
+22,Viz,Temporal Demand,1.0
+22,Viz,Performance,11.0
+22,Viz,Effort,10.0
+22,Viz,Frustration,8.0
+23,No Viz,Mental Demand,6.0
+23,No Viz,Physical Demand,14.0
+23,No Viz,Temporal Demand,4.0
+23,No Viz,Performance,11.0
+23,No Viz,Effort,11.0
+23,No Viz,Frustration,6.0
+23,Viz,Mental Demand,7.0
+23,Viz,Physical Demand,8.0
+23,Viz,Temporal Demand,5.0
+23,Viz,Performance,11.0
+23,Viz,Effort,11.0
+23,Viz,Frustration,4.0
+24,No Viz,Mental Demand,14.0
+24,No Viz,Physical Demand,10.0
+24,No Viz,Temporal Demand,5.0
+24,No Viz,Performance,5.0
+24,No Viz,Effort,10.0
+24,No Viz,Frustration,3.0
+24,Viz,Mental Demand,3.0
+24,Viz,Physical Demand,2.0
+24,Viz,Temporal Demand,1.0
+24,Viz,Performance,3.0
+24,Viz,Effort,2.0
+24,Viz,Frustration,1.0

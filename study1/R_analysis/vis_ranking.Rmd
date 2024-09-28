@@ -28,13 +28,28 @@ library(ltm)
 ```{r read csv}
 
 setwd("C:/Users/micha/OneDrive/My_GitHub_Repos/robot-x-ar/study1/data/questionnaire/")
-rank_df <- read_csv("vis_ranking.csv")
+# rank_df <- read_csv("vis_ranking.csv")
+rank_df <- read_csv("vis_ranking_no_pid.csv")
+
+rank_df$condition <- factor(rank_df$condition, levels = c("D", "A", "B", "C"))
+rank_df <- rank_df %>%
+  mutate(condition = recode(condition, 
+                           "A" = "Baseline",
+                           "B" = "HumanHorizontal",
+                           "C" = "HumanVertical",
+                           "D" = "RobotHorizontal"))
+rank_df <- rank_df %>%
+  mutate(ranking = recode(ranking, 
+                           "1" = "1st",
+                           "2" = "2nd",
+                           "3" = "3rd",
+                           "4" = "4th"))
 
 
-######################### get mean and sd (or se) ######################### 
-rank_df %>%
-  group_by(condition) %>%
-  get_summary_stats(ranking, type = "mean_sd")
+# ######################### get mean and sd (or se) ######################### 
+# rank_df %>%
+#   group_by(condition) %>%
+#   get_summary_stats(ranking, type = "mean_sd")
 
 
 ```
@@ -46,6 +61,22 @@ rank_df %>%
 bxp <- ggboxplot(rank_df, x = "condition", y = "ranking", add = "jitter")
 bxp
 # ggexport(bxp, filename = "tlx.png")
+
+
+p <- ggplot(rank_df, aes(fill=condition, y=pid, x=ranking)) + 
+    geom_bar(position="stack", stat="identity") +
+  scale_fill_manual(values = c("#83C4CB", "#2C5985", "#ff7f0e", "#2A7B43" ))+
+  theme_minimal() +
+  labs(y = "# of users per ranking", x = "Ranking") +
+  theme(axis.text.x = element_text(hjust = 0.5, size = 13, face = "bold"),
+        axis.text.y = element_text(size=14, face="bold"),
+        axis.title.x = element_text(size=14, face="bold"),
+        axis.title.y = element_text(size=14, face="bold"),
+        legend.position = "none")
+
+p
+
+ggsave("ranking.pdf", plot = p, width = 5, height = 5, device = "pdf")
 
 
 ```

@@ -1,0 +1,159 @@
+---
+title: "p_trust"
+output: html_document
+date: "2023-09-19"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Analysis script for "
+
+```{r load libraries}
+library(readr)
+library(tidyverse)
+library(ggpubr)
+library(rstatix)
+library(stats)
+library(lme4)
+library(dplyr)
+library(ez)
+library(ltm)
+
+library(ggplot2)
+library(reshape2)
+library(cowplot)
+library(tidyr)
+
+```
+
+
+## Extract dataframe from csv file and get (mean, sd) or (mean, se) summary
+
+```{r read csv}
+
+setwd("C:/Users/micha/OneDrive/My_GitHub_Repos/robot-x-ar/study2/data/")
+form_df <- read_csv("tlx_plotting_data1.csv")
+
+form_df$tlx_item <- factor(form_df$tlx_item, levels = c("Mental Demand", "Physical Demand", "Temporal Demand",
+                                                          "Performance", "Effort", "Frustration"))
+form_df$condition <- factor(form_df$condition, levels = c("Viz", "No Viz"))
+
+form_df <- form_df %>%
+  mutate(tlx_item = recode(tlx_item, 
+                           "Mental Demand" = "Mental\nDemand",
+                           "Physical Demand" = "Physical\nDemand",
+                           "Temporal Demand" = "Temporal\nDemand"))
+
+data_summary <- function(data, varname, groupnames){
+  require(plyr)
+  summary_func <- function(x, col){
+    c(mean = mean(x[[col]], na.rm=TRUE),
+      # sd = sd(x[[col]], na.rm=TRUE)),
+      se = sd(x[[col]], na.rm=TRUE) / sqrt(length(x[[col]])))
+  }
+  data_sum<-ddply(data, groupnames, .fun=summary_func,
+                  varname)
+  data_sum <- rename(data_sum, c("mean" = varname))
+ return(data_sum)
+}
+
+
+df_summary <- data_summary(form_df, varname="tlx_score", 
+                    groupnames=c("condition", "tlx_item"))
+# Convert dose to a factor variable
+df_summary$condition=as.factor(df_summary$condition)
+df_summary
+
+```
+
+
+```{r plotting}
+
+p <- ggplot(df_summary, aes(x=tlx_item, y=tlx_score, fill=condition)) + 
+   geom_bar(stat="summary", fun="mean", position=position_dodge()) +
+  geom_errorbar(aes(ymin=tlx_score-se, ymax=tlx_score+se), width=.3, size=1,
+                 position=position_dodge(.9)) +
+  ylim(-1, 20) +
+  theme_minimal() +
+  labs(y = "NASA-TLX Score (1-20)", x = "") +
+  theme(axis.text.x = element_text(hjust = 0.5, size = 13, face = "bold"),  # Rotate x-axis labels
+        legend.position = "bottom", legend.title = element_text(size=14), legend.text = element_text(size=14, face="bold"),
+        axis.text.y = element_text(size=14, face="bold"),
+        axis.title.y = element_text(size=14, face="bold")) +
+  scale_fill_manual(values = c("#2C5985", "#83C4CB"))
+
+p
+
+ggsave("study2_tlx.pdf", plot = p, width = 8, height = 5, device = "pdf")
+
+
+```
+
+## tlx plot
+
+```{r tlx plot}
+
+pwc <- form_df %>%
+  group_by(tlx_item) %>%
+  pairwise_t_test(
+    tlx_score ~ condition, paired = TRUE,
+    p.adjust.method = "holm", detailed = TRUE
+    )
+pwc
+
+
+# pwc <- compare_means(tlx_score ~ condition, form_df, method = "t.test", paired = TRUE)
+
+# p + geom_bracket(
+#   data = pwc, 
+#   aes(xmin = group1, xmax = group2, y.position = 35), 
+#   label = format.pval(pwc$p.adj, digits = 2)
+# )
+
+# +
+#     geom_text(data = pwc, aes(x = (as.numeric(group1) + as.numeric(group2)) / 2,
+#                                          y = y.position + 0.05, label = format.pval(p, digits = 2)))
+
+# # Add p-values onto the box plots
+# pwc <- pwc %>%
+#   add_xy_position(x = "tlx_item", group = "condition", dodge = 0.8)
+# 
+# p + stat_pvalue_manual(
+#   pwc, label = "p", tip.length = 0
+#   )
+
+
+# bp <- ggbarplot(
+#   form_df, x = "tlx_item", y = "tlx_score", add = "mean_sd", 
+#   color= "condition", palette = c("#2C5985", "#ff7f0e", "#2A7B43", "#83C4CB"),
+#   position = position_dodge(0.8)
+#   )
+# bp
+# 
+# # Add p-values onto the bar plots
+# stat.test <- stat.test %>%
+#   add_xy_position(fun = "mean_sd", x = "tlx_item", dodge = 0.8) 
+# p + stat_pvalue_manual(
+#   stat.test,  label = "p.adj.signif", tip.length = 0.01
+#   )
+
+
+
+# ggplot(form_df, aes(x = tlx_item, y = tlx_mean, fill = condition)) +
+#   geom_bar(stat = "identity", position = "dodge") +  # Dodge to separate bars
+#   geom_errorbar(aes(ymin = lower, ymax = upper),
+#                 position = position_dodge(width = 0.9), width = 0.25) +  # Error bars
+#   theme_minimal() +
+#   labs(y = "TLX Score (1-20)", x = "") +
+#   theme(axis.text.x = element_text(angle = 45, hjust = 1),  # Rotate x-axis labels
+#         legend.position = "top") +
+#   scale_fill_manual(values = c("#1f77b4", "#ff7f0e", "#2ca02c", "#d62728"))  # Custom colors
+
+
+```
+
+
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
