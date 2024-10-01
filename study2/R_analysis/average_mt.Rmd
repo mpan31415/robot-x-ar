@@ -30,11 +30,38 @@ library(ltm)
 setwd("C:/Users/micha/OneDrive/My_GitHub_Repos/robot-x-ar/study2/data/")
 task_df <- read_csv("merged_all_data.csv")
 
+task_df$condition <- factor(task_df$condition, levels = c("yes", "no"))
+task_df <- task_df %>%
+  mutate(condition = recode(condition, 
+                           "yes" = "AR Arm",
+                           "no" = "No Arm"))
+
+task_df$cond_order <- factor(task_df$cond_order, levels = c("viz_first", "none_first"))
+task_df <- task_df %>%
+  mutate(cond_order = recode(cond_order, 
+                           "viz_first" = "AR Arm First",
+                           "none_first" = "No Arm First"))
+
 
 ######################### get mean and sd (or se) ######################### 
 task_df %>%
   group_by(condition) %>%
   get_summary_stats(time, type = "mean_sd")
+
+
+
+data_summary <- function(data, varname, groupnames){
+  require(plyr)
+  summary_func <- function(x, col){
+    c(mean = mean(x[[col]], na.rm=TRUE),
+      # sd = sd(x[[col]], na.rm=TRUE)),
+      se = sd(x[[col]], na.rm=TRUE) / sqrt(length(x[[col]])))
+  }
+  data_sum<-ddply(data, groupnames, .fun=summary_func,
+                  varname)
+  data_sum <- rename(data_sum, c("mean" = varname))
+ return(data_sum)
+}
 
 
 ```
@@ -43,23 +70,128 @@ task_df %>%
 
 ```{r do plotting}
 
-bxp <- ggboxplot(task_df, x = "condition", y = "time", add = "jitter")
-bxp
+# bxp <- ggboxplot(task_df, x = "condition", y = "time", add = "jitter")
+# bxp
+# 
+# bxp <- ggboxplot(task_df, x = "cond_order", y = "time", add = "jitter", color = "condition")
+# bxp
+# # ggexport(bxp, filename = "tlx.png")
+# 
+# 
+# ggplot(task_df, aes(x = condition, y = time, 
+#                      shape = cond_order,
+#                      group = cond_order,
+#                      color = cond_order)) +
+#   stat_summary(fun = "mean", geom = "point", size = 3) +
+#   stat_summary(fun = "mean", geom = "line") +
+#   stat_summary(fun.data = "mean_se", geom = "errorbar", width = .2) +
+#   # scale_color_manual(values = c("blue", "darkorange")) +
+#   theme_classic()
+# 
+# 
+# bxp <- ggboxplot(task_df, "condition", "time",
+#    color = "condition", palette = c("#00AFBB", "#376491"),
+#    add = "jitter") +
+#   labs(y = "Movement Time (s)", x = "") +
+#   theme(legend.position = "none",
+#         axis.text.x = element_text(hjust = 0.5, size = 20, face = "bold"),
+#         axis.text.y = element_text(size=14, face="bold"),
+#         axis.title.x = element_text(size=14, face="bold"),
+#         axis.title.y = element_text(size=20, face="bold"))
+# 
+# bxp
 
-bxp <- ggboxplot(task_df, x = "cond_order", y = "time", add = "jitter", color = "condition")
-bxp
-# ggexport(bxp, filename = "tlx.png")
+
+# p <- ggbarplot(
+#   task_df, x = "condition", y = "time", 
+#    add = c("mean_se"), 
+#    fill = "condition", palette = c("#2C5985", "#83C4CB"),
+#    position = position_dodge(0.8)
+#   ) +
+#   labs(y = "Movement Time (s)", x="") +
+#   theme(legend.position = "none",
+#         axis.text.x = element_text(hjust = 0.5, size = 19, face = "bold"),
+#         axis.text.y = element_text(size=20, face="bold"),
+#         axis.title.x = element_text(size=14, face="bold"),
+#         axis.title.y = element_text(size=20, face="bold"))
+# 
+# p
+# 
+# 
+# ip <- ggbarplot(
+#   task_df, x = "cond_order", y = "time", 
+#    add = c("mean_se"), 
+#    fill = "condition", palette = c("#2C5985", "#83C4CB"),
+#    position = position_dodge(0.8)
+#   ) +
+#   scale_fill_manual("" ,values=c("#2C5985", "#83C4CB")) +
+#   labs(y = "Movement Time (s)", x="") +
+#   theme(axis.text.x = element_text(hjust = 0.5, size = 19, face = "bold"),
+#         axis.text.y = element_text(size=20, face="bold"),
+#         axis.title.x = element_text(size=14, face="bold"),
+#         axis.title.y = element_text(size=20, face="bold"),
+#         legend.text = element_text(size=20, face="bold")
+#         )
+# 
+# ip
 
 
-ggplot(task_df, aes(x = condition, y = time, 
-                     shape = cond_order,
-                     group = cond_order,
-                     color = cond_order)) +
-  stat_summary(fun = "mean", geom = "point", size = 3) +
-  stat_summary(fun = "mean", geom = "line") +
-  stat_summary(fun.data = "mean_se", geom = "errorbar", width = .2) +
-  # scale_color_manual(values = c("blue", "darkorange")) +
-  theme_classic()
+
+df_summary1 <- data_summary(task_df, varname="time", 
+                    groupnames=c("condition"))
+# Convert dose to a factor variable
+df_summary1$condition=as.factor(df_summary1$condition)
+df_summary1
+
+p <- ggplot(df_summary1, aes(x=condition, y=time, fill=condition)) + 
+   geom_bar(stat="identity", position=position_dodge()) +
+  geom_errorbar(aes(ymin=time-se, ymax=time+se), width=.3, size=1,
+                 position=position_dodge(.9)) +
+  ylim(0, 230) +
+  theme_minimal() +
+  labs(y = "Movement Time (s)", x = "") +
+  theme(axis.text.x = element_blank(),  # Rotate x-axis labels
+        # axis.text.x = element_text(hjust = 0.5, size = 18, face = "bold"),  # Rotate x-axis labels
+        legend.position = "bottom", legend.title = element_text(size=14), 
+        legend.text = element_text(size=18, face="bold"),
+        axis.text.y = element_text(size=18, face="bold"),
+        axis.title.y = element_text(size=18, face="bold")) +
+  scale_fill_manual("", values = c("#2C5985", "#83C4CB"))
+
+p
+
+ggsave("movement_time2.pdf", plot = p, width = 4, height = 5, device = "pdf")
+
+
+
+
+df_summary2 <- data_summary(task_df, varname="time", 
+                    groupnames=c("condition", "cond_order"))
+# Convert dose to a factor variable
+df_summary2$condition=as.factor(df_summary2$condition)
+df_summary2$cond_order=as.factor(df_summary2$cond_order)
+df_summary2
+
+
+
+ip <- ggplot(df_summary2, aes(x=cond_order, y=time, fill=condition)) + 
+   geom_bar(stat="identity", position=position_dodge()) +
+  geom_errorbar(aes(ymin=time-se, ymax=time+se), width=.3, size=1,
+                 position=position_dodge(.9)) +
+  ylim(0, 230) +
+  theme_minimal() +
+  labs(y = "Movement Time (s)", x = "") +
+  theme(axis.text.x = element_text(hjust = 0.5, size = 18, face = "bold"),  # Rotate x-axis labels
+        legend.position = "none", 
+        # legend.title = element_text(size=14), 
+        legend.text = element_text(size=18, face="bold"),
+        axis.text.y = element_text(size=18, face="bold"),
+        axis.title.y = element_text(size=18, face="bold")) +
+  scale_fill_manual("", values = c("#2C5985", "#83C4CB"))
+
+ip
+
+ggsave("movement_time2inter.pdf", plot = ip, width = 6, height = 5, device = "pdf")
 
 
 ```

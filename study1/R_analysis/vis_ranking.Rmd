@@ -68,10 +68,10 @@ p <- ggplot(rank_df, aes(fill=condition, y=pid, x=ranking)) +
   scale_fill_manual(values = c("#83C4CB", "#2C5985", "#ff7f0e", "#2A7B43" ))+
   theme_minimal() +
   labs(y = "# of users per ranking", x = "Ranking") +
-  theme(axis.text.x = element_text(hjust = 0.5, size = 13, face = "bold"),
-        axis.text.y = element_text(size=14, face="bold"),
-        axis.title.x = element_text(size=14, face="bold"),
-        axis.title.y = element_text(size=14, face="bold"),
+  theme(axis.text.x = element_text(hjust = 0.5, size = 18, face = "bold"),
+        axis.text.y = element_text(size=18, face="bold"),
+        axis.title.x = element_text(size=18, face="bold"),
+        axis.title.y = element_text(size=18, face="bold"),
         legend.position = "none")
 
 p

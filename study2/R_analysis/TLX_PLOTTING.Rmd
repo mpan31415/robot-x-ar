@@ -38,13 +38,18 @@ form_df <- read_csv("tlx_plotting_data1.csv")
 
 form_df$tlx_item <- factor(form_df$tlx_item, levels = c("Mental Demand", "Physical Demand", "Temporal Demand",
                                                           "Performance", "Effort", "Frustration"))
-form_df$condition <- factor(form_df$condition, levels = c("Viz", "No Viz"))
-
 form_df <- form_df %>%
   mutate(tlx_item = recode(tlx_item, 
-                           "Mental Demand" = "Mental\nDemand",
-                           "Physical Demand" = "Physical\nDemand",
-                           "Temporal Demand" = "Temporal\nDemand"))
+                           "Mental Demand" = "Mental",
+                           "Physical Demand" = "Physical",
+                           "Temporal Demand" = "Temporal"))
+
+form_df$condition <- factor(form_df$condition, levels = c("Viz", "No Viz"))
+form_df <- form_df %>%
+  mutate(condition = recode(condition, 
+                           "Viz" = "AR Arm",
+                           "No Viz" = "No Arm"))
+
 
 data_summary <- function(data, varname, groupnames){
   require(plyr)
@@ -77,16 +82,18 @@ p <- ggplot(df_summary, aes(x=tlx_item, y=tlx_score, fill=condition)) +
                  position=position_dodge(.9)) +
   ylim(-1, 20) +
   theme_minimal() +
+  scale_fill_manual("" ,values=c("#2C5985", "#83C4CB")) +
   labs(y = "NASA-TLX Score (1-20)", x = "") +
-  theme(axis.text.x = element_text(hjust = 0.5, size = 13, face = "bold"),  # Rotate x-axis labels
-        legend.position = "bottom", legend.title = element_text(size=14), legend.text = element_text(size=14, face="bold"),
-        axis.text.y = element_text(size=14, face="bold"),
-        axis.title.y = element_text(size=14, face="bold")) +
-  scale_fill_manual(values = c("#2C5985", "#83C4CB"))
+  theme(axis.text.x = element_text(hjust = 0.5, size = 17, face = "bold"),  # Rotate x-axis labels
+        legend.position = "bottom", legend.title = element_text(size=18), 
+        legend.text = element_text(size=18, face="bold"),
+        axis.text.y = element_text(size=18, face="bold"),
+        axis.title.y = element_text(size=18, face="bold")) +
+  scale_fill_manual("", values = c("#2C5985", "#83C4CB"))
 
 p
 
-ggsave("study2_tlx.pdf", plot = p, width = 8, height = 5, device = "pdf")
+ggsave("study2_tlx.pdf", plot = p, width = 9, height = 5, device = "pdf")
 
 
 ```

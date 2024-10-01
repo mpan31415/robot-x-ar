@@ -30,11 +30,41 @@ library(ltm)
 setwd("C:/Users/micha/OneDrive/My_GitHub_Repos/robot-x-ar/study1/data/")
 task_df <- read_csv("half_performance_data.csv")
 
+task_df$condition <- factor(task_df$condition, levels = c("A", "B", "C", "D"))
+task_df <- task_df %>%
+  mutate(condition = recode(condition, 
+                           "A" = "Baseline",
+                           "B" = "HumanHorizontal",
+                           "C" = "HumanVertical",
+                           "D" = "RobotHorizontal"))
+
 
 ######################### get mean and sd (or se) #########################
 task_df %>%
   group_by(condition) %>%
   get_summary_stats(average_mt, type = "mean_sd")
+
+
+#########################
+data_summary <- function(data, varname, groupnames){
+  require(plyr)
+  summary_func <- function(x, col){
+    c(mean = mean(x[[col]], na.rm=TRUE),
+      # sd = sd(x[[col]], na.rm=TRUE)),
+      se = sd(x[[col]], na.rm=TRUE) / sqrt(length((x[[col]]))))
+  }
+  data_sum<-ddply(data, groupnames, .fun=summary_func,
+                  varname)
+  data_sum <- rename(data_sum, c("mean" = varname))
+ return(data_sum)
+}
+
+
+df_summary <- data_summary(task_df, varname="average_mt", 
+                    groupnames=c("condition"))
+# Convert dose to a factor variable
+df_summary$condition=as.factor(df_summary$condition)
+head(df_summary)
 
 
 ```
@@ -43,9 +73,59 @@ task_df %>%
 
 ```{r do plotting}
 
-bxp <- ggboxplot(task_df, x = "condition", y = "average_mt", add = "jitter")
-bxp
-# ggexport(bxp, filename = "tlx.png")
+# bxp <- ggboxplot(task_df, x = "condition", y = "average_mt", add = "jitter")
+# bxp
+# # ggexport(bxp, filename = "tlx.png")
+
+
+# bxp <- ggboxplot(task_df, "condition", "average_mt",
+#    color = "condition", palette = c("#00AFBB", "#E7B800", "#FC4E07", "#376491"),
+#    add = "jitter") +
+#   labs(y = "Movement Time (s)", x="") +
+#   theme(legend.position = "none",
+#         axis.text.x = element_text(hjust = 0.5, size = 18, face = "bold"),
+#         axis.text.y = element_text(size=14, face="bold"),
+#         axis.title.x = element_text(size=14, face="bold"),
+#         axis.title.y = element_text(size=18, face="bold"))
+# 
+# bxp
+
+# p <- ggbarplot(
+#   task_df, x = "condition", y = "average_mt", 
+#    add = c("mean_se"), 
+#    fill = "condition",
+#    # color = "condition", 
+#    palette = c("#2C5985", "#ff7f0e", "#2A7B43", "#83C4CB"),
+#    position = position_dodge(0.8)
+#   ) +
+#   labs(y = "Movement Time (s)", x="") +
+#   theme(legend.position = "none",
+#         axis.text.x = element_text(hjust = 0.5, size = 19, face = "bold"),
+#         axis.text.y = element_text(size=20, face="bold"),
+#         axis.title.x = element_text(size=14, face="bold"),
+#         axis.title.y = element_text(size=20, face="bold"))
+# 
+# p
+
+p <- ggplot(df_summary, aes(x=condition, y=average_mt, fill=condition)) + 
+   geom_bar(stat="identity", position=position_dodge()) +
+  geom_errorbar(aes(ymin=average_mt-se, ymax=average_mt+se), width=.3, size=1,
+                 position=position_dodge(.9)) +
+  ylim(0, 15) +
+  theme_minimal() +
+  labs(y = "Movement Time (s)", x = "") +
+  theme(axis.text.x = element_blank(),  # Rotate x-axis labels
+        # axis.text.x = element_text(hjust = 0.5, size = 18, face = "bold"),  # Rotate x-axis labels
+        legend.position = "bottom", legend.title = element_text(size=14), 
+        legend.text = element_text(size=18, face="bold"),
+        axis.text.y = element_text(size=18, face="bold"),
+        axis.title.y = element_text(size=18, face="bold")) +
+  scale_fill_manual("", values = c("#2C5985", "#ff7f0e", "#2A7B43", "#83C4CB"))
+
+p
+
+
+ggsave("movement_time1.pdf", plot = p, width = 10, height = 5, device = "pdf")
 
 
 ```

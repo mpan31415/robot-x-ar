@@ -41,9 +41,9 @@ form_df$tlx_item <- factor(form_df$tlx_item, levels = c("Mental Demand", "Physic
 
 form_df <- form_df %>%
   mutate(tlx_item = recode(tlx_item, 
-                           "Mental Demand" = "Mental\nDemand",
-                           "Physical Demand" = "Physical\nDemand",
-                           "Temporal Demand" = "Temporal\nDemand"))
+                           "Mental Demand" = "Mental",
+                           "Physical Demand" = "Physical",
+                           "Temporal Demand" = "Temporal"))
 
 data_summary <- function(data, varname, groupnames){
   require(plyr)
@@ -77,11 +77,12 @@ p <- ggplot(df_summary, aes(x=tlx_item, y=tlx_score, fill=condition)) +
   ylim(-1, 20) +
   theme_minimal() +
   labs(y = "TLX Score (1-20)", x = "") +
-  theme(axis.text.x = element_text(hjust = 0.5, size = 13, face = "bold"),  # Rotate x-axis labels
-        legend.position = "bottom", legend.title = element_text(size=14), legend.text = element_text(size=14, face="bold"),
-        axis.text.y = element_text(size=14, face="bold"),
-        axis.title.y = element_text(size=14, face="bold")) +
-  scale_fill_manual(values = c("#2C5985", "#ff7f0e", "#2A7B43", "#83C4CB"))
+  theme(axis.text.x = element_text(hjust = 0.5, size = 18, face = "bold"),  # Rotate x-axis labels
+        legend.position = "bottom", legend.title = element_text(size=14), 
+        legend.text = element_text(size=18, face="bold"),
+        axis.text.y = element_text(size=18, face="bold"),
+        axis.title.y = element_text(size=18, face="bold")) +
+  scale_fill_manual("", values = c("#2C5985", "#ff7f0e", "#2A7B43", "#83C4CB"))
 
 p
 
