@@ -27,8 +27,8 @@ library(ltm)
 
 ```{r read csv}
 
-setwd("C:/Users/micha/OneDrive/My_GitHub_Repos/robot-x-ar/study2/data/")
-task_df <- read_csv("merged_all_data.csv")
+setwd("C:/Users/micha/OneDrive/My_GitHub_Repos/robot-x-ar/study2/data/task_performance/")
+task_df <- read_csv("movement_time_all_points.csv")
 
 task_df$condition <- factor(task_df$condition, levels = c("yes", "no"))
 task_df <- task_df %>%
@@ -80,7 +80,7 @@ p <- ggplot(df_summary1, aes(x=condition, y=time, fill=condition)) +
    geom_bar(stat="identity", position=position_dodge(), width=.7) +
   geom_errorbar(aes(ymin=time-se, ymax=time+se), width=.3, size=1,
                  position=position_dodge(.9)) +
-  ylim(0, 180) +
+  ylim(0, 50) +
   theme_minimal() +
   labs(y = "Movement Time (s)", x = "") +
   theme(axis.text.x = element_blank(),  # Rotate x-axis labels
@@ -111,7 +111,7 @@ ip <- ggplot(df_summary2, aes(x=cond_order, y=time, fill=condition)) +
    geom_bar(stat="identity", position=position_dodge()) +
   geom_errorbar(aes(ymin=time-se, ymax=time+se), width=.3, size=1,
                  position=position_dodge(.9)) +
-  ylim(0, 210) +
+  ylim(0, 60) +
   theme_minimal() +
   labs(y = "Movement Time (s)", x = "") +
   theme(axis.text.x = element_text(hjust = 0.5, size = 32, face = "bold"),  # Rotate x-axis labels
@@ -125,6 +125,33 @@ ip <- ggplot(df_summary2, aes(x=cond_order, y=time, fill=condition)) +
 ip
 
 ggsave("movement_time2inter.pdf", plot = ip, width = 9, height = 5, device = "pdf")
+
+
+###############################################################################
+
+df_summary3 <- data_summary(task_df, varname="time", 
+                    groupnames=c("posture"))
+df_summary3$posture=as.factor(df_summary3$posture)
+df_summary3
+
+pp <- ggplot(df_summary3, aes(x=posture, y=time, fill=posture)) + 
+   geom_bar(stat="identity", position=position_dodge(), width=.7) +
+  geom_errorbar(aes(ymin=time-se, ymax=time+se), width=.3, size=1,
+                 position=position_dodge(.9)) +
+  ylim(0, 60) +
+  theme_minimal() +
+  labs(y = "Movement Time (s)", x = "") +
+  theme(axis.text.x = element_blank(),  # Rotate x-axis labels
+        # axis.text.x = element_text(hjust = 0.5, size = 18, face = "bold"),  # Rotate x-axis labels
+        legend.position = "bottom", legend.title = element_text(size=14), 
+        legend.text = element_text(size=32, face="bold"),
+        axis.text.y = element_text(size=32, face="bold"),
+        axis.title.y = element_text(size=30, face="bold")) +
+  scale_fill_manual("", values = c("#2C5985", "#83C4CB", "#FFFFCC", "#66FF66"))
+
+pp
+
+ggsave("movement_time2posture.pdf", plot = pp, width = 9, height = 5, device = "pdf")
 
 
 ```
@@ -219,44 +246,25 @@ ggqqplot(task_df, "time", facet.by = "condition")
 
 ```{r fit model}
 
-######################### One-way ANOVA test #########################  
-res.aov <- anova_test(data = task_df, dv = time, wid = pid, within = condition)
-get_anova_table(res.aov)
-
-# ######################### Two-way mixed ANOVA test #########################  
-# res.aov <- task_df %>% anova_test(time ~ condition * cond_order)
-# res.aov
-
-# Two-way mixed ANOVA test
 res.aov <- anova_test(
   data = task_df, dv = time, wid = pid,
-  between = cond_order, within = condition
+  within = c(condition, posture)
   )
 get_anova_table(res.aov)
 
-# pairwise comparisons
-pwc <- task_df %>%
-  pairwise_t_test(
-    time ~ condition, paired = TRUE,
-    p.adjust.method = "holm"
-    )
-pwc
 
-# pairwise comparisons
-pwc <- task_df %>%
-  group_by(cond_order) %>%
-  pairwise_t_test(
-    time ~ condition, paired = TRUE,
-    p.adjust.method = "holm", detailed = TRUE
-    )
-pwc
+# Compute mean time per participant
+tdf <- data_summary(task_df, varname="time", 
+                    groupnames=c("cond_order"))
+tdf$cond_order=as.factor(tdf$cond_order)
+tdf
 
+avg_time_df <- data_summary(task_df, varname="time", 
+                    groupnames=c("pid", "cond_order"))
+avg_time_df$cond_order=as.factor(avg_time_df$cond_order)
 
-# ###### kruskal-wallis test ######
-# res.kruskal <- task_df %>% kruskal_test(average_mt ~ condition)
-# res.kruskal
-# 
-# task_df %>% kruskal_effsize(average_mt ~ condition)
+anova_result <- aov(time ~ cond_order, data = avg_time_df)
+summary(anova_result)
 
 
 

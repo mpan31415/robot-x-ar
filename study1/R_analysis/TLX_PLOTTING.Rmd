@@ -74,19 +74,19 @@ p <- ggplot(df_summary, aes(x=tlx_item, y=tlx_score, fill=condition)) +
    geom_bar(stat="identity", position=position_dodge()) +
   geom_errorbar(aes(ymin=tlx_score-se, ymax=tlx_score+se), width=.3, size=1,
                  position=position_dodge(.9)) +
-  ylim(-1, 20) +
+  ylim(-1, 12) +
   theme_minimal() +
   labs(y = "TLX Score (1-20)", x = "") +
-  theme(axis.text.x = element_text(hjust = 0.5, size = 18, face = "bold"),  # Rotate x-axis labels
+  theme(axis.text.x = element_text(hjust = 0.5, size = 36, face = "bold"),  # Rotate x-axis labels
         legend.position = "bottom", legend.title = element_text(size=14), 
-        legend.text = element_text(size=18, face="bold"),
-        axis.text.y = element_text(size=18, face="bold"),
-        axis.title.y = element_text(size=18, face="bold")) +
+        legend.text = element_text(size=36, face="bold"),
+        axis.text.y = element_text(size=34, face="bold"),
+        axis.title.y = element_text(size=32, face="bold")) +
   scale_fill_manual("", values = c("#2C5985", "#ff7f0e", "#2A7B43", "#83C4CB"))
 
 p
 
-ggsave("study1_tlx.pdf", plot = p, width = 12, height = 5, device = "pdf")
+ggsave("study1_tlx.pdf", plot = p, width = 24, height = 5, device = "pdf")
 
 
 ```

@@ -80,20 +80,19 @@ p <- ggplot(df_summary, aes(x=tlx_item, y=tlx_score, fill=condition)) +
    geom_bar(stat="summary", fun="mean", position=position_dodge()) +
   geom_errorbar(aes(ymin=tlx_score-se, ymax=tlx_score+se), width=.3, size=1,
                  position=position_dodge(.9)) +
-  ylim(-1, 20) +
+  ylim(0, 14) +
   theme_minimal() +
   scale_fill_manual("" ,values=c("#2C5985", "#83C4CB")) +
-  labs(y = "NASA-TLX Score (1-20)", x = "") +
-  theme(axis.text.x = element_text(hjust = 0.5, size = 17, face = "bold"),  # Rotate x-axis labels
+  labs(y = "TLX Score (1-20)", x = "") +
+  theme(axis.text.x = element_text(hjust = 0.5, size = 29, face = "bold"),  # Rotate x-axis labels
         legend.position = "bottom", legend.title = element_text(size=18), 
-        legend.text = element_text(size=18, face="bold"),
-        axis.text.y = element_text(size=18, face="bold"),
-        axis.title.y = element_text(size=18, face="bold")) +
-  scale_fill_manual("", values = c("#2C5985", "#83C4CB"))
+        legend.text = element_text(size=32, face="bold"),
+        axis.text.y = element_text(size=30, face="bold"),
+        axis.title.y = element_text(size=30, face="bold"))
 
 p
 
-ggsave("study2_tlx.pdf", plot = p, width = 9, height = 5, device = "pdf")
+ggsave("study2_tlx.pdf", plot = p, width = 16, height = 5, device = "pdf")
 
 
 ```

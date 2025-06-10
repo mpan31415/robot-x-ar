@@ -27,8 +27,8 @@ library(ltm)
 
 ```{r read csv}
 
-setwd("C:/Users/micha/OneDrive/My_GitHub_Repos/robot-x-ar/study2/data/")
-task_df <- read_csv("merged_all_data.csv")
+setwd("C:/Users/micha/OneDrive/My_GitHub_Repos/robot-x-ar/study2/data/test/")
+task_df <- read_csv("mt_grouped.csv")
 
 task_df$condition <- factor(task_df$condition, levels = c("yes", "no"))
 task_df <- task_df %>%
@@ -36,11 +36,11 @@ task_df <- task_df %>%
                            "yes" = "AR Arm",
                            "no" = "No Arm"))
 
-task_df$cond_order <- factor(task_df$cond_order, levels = c("viz_first", "none_first"))
-task_df <- task_df %>%
-  mutate(cond_order = recode(cond_order, 
-                           "viz_first" = "AR Arm First",
-                           "none_first" = "No Arm First"))
+# task_df$cond_order <- factor(task_df$cond_order, levels = c("viz_first", "none_first"))
+# task_df <- task_df %>%
+#   mutate(cond_order = recode(cond_order, 
+#                            "viz_first" = "AR Arm First",
+#                            "none_first" = "No Arm First"))
 
 
 ######################### get mean and sd (or se) ######################### 
@@ -74,13 +74,12 @@ df_summary1 <- data_summary(task_df, varname="time",
                     groupnames=c("condition"))
 # Convert dose to a factor variable
 df_summary1$condition=as.factor(df_summary1$condition)
-df_summary1
 
 p <- ggplot(df_summary1, aes(x=condition, y=time, fill=condition)) + 
    geom_bar(stat="identity", position=position_dodge(), width=.7) +
   geom_errorbar(aes(ymin=time-se, ymax=time+se), width=.3, size=1,
                  position=position_dodge(.9)) +
-  ylim(0, 180) +
+  ylim(0, 230) +
   theme_minimal() +
   labs(y = "Movement Time (s)", x = "") +
   theme(axis.text.x = element_blank(),  # Rotate x-axis labels
@@ -93,38 +92,7 @@ p <- ggplot(df_summary1, aes(x=condition, y=time, fill=condition)) +
 
 p
 
-ggsave("movement_time2.pdf", plot = p, width = 6, height = 5, device = "pdf")
 
-
-###############################################################################
-
-df_summary2 <- data_summary(task_df, varname="time", 
-                    groupnames=c("condition", "cond_order"))
-# Convert dose to a factor variable
-df_summary2$condition=as.factor(df_summary2$condition)
-df_summary2$cond_order=as.factor(df_summary2$cond_order)
-df_summary2
-
-
-
-ip <- ggplot(df_summary2, aes(x=cond_order, y=time, fill=condition)) + 
-   geom_bar(stat="identity", position=position_dodge()) +
-  geom_errorbar(aes(ymin=time-se, ymax=time+se), width=.3, size=1,
-                 position=position_dodge(.9)) +
-  ylim(0, 210) +
-  theme_minimal() +
-  labs(y = "Movement Time (s)", x = "") +
-  theme(axis.text.x = element_text(hjust = 0.5, size = 32, face = "bold"),  # Rotate x-axis labels
-        legend.position = "none", 
-        # legend.title = element_text(size=14), 
-        legend.text = element_text(size=30, face="bold"),
-        axis.text.y = element_text(size=30, face="bold"),
-        axis.title.y = element_text(size=30, face="bold")) +
-  scale_fill_manual("", values = c("#2C5985", "#83C4CB"))
-
-ip
-
-ggsave("movement_time2inter.pdf", plot = ip, width = 9, height = 5, device = "pdf")
 
 
 ```
