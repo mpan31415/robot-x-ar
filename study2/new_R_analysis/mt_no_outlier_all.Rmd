@@ -1,0 +1,279 @@
+---
+title: "p_trust"
+output: html_document
+date: "2023-09-19"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Analysis script for "
+
+```{r load libraries}
+library(readr)
+library(tidyverse)
+library(ggpubr)
+library(rstatix)
+library(stats)
+library(lme4)
+library(dplyr)
+library(ez)
+library(ltm)
+library(lmerTest)
+```
+
+
+## Extract dataframe from csv file and get (mean, sd) or (mean, se) summary
+
+```{r read csv}
+
+setwd("C:/Users/micha/OneDrive/My_GitHub_Repos/robot-x-ar/study2/data/new/")
+task_df <- read_csv("mt_data.csv")
+
+task_df$condition <- factor(task_df$condition, levels = c("yes", "no"))
+task_df <- task_df %>%
+  mutate(condition = recode(condition, 
+                           "yes" = "AR Arm",
+                           "no" = "No Arm"))
+
+task_df$cond_order <- factor(task_df$cond_order, levels = c("viz_first", "none_first"))
+task_df <- task_df %>%
+  mutate(cond_order = recode(cond_order, 
+                           "viz_first" = "AR Arm First",
+                           "none_first" = "No Arm First"))
+
+
+######################### get mean and sd (or se) ######################### 
+task_df %>%
+  group_by(condition) %>%
+  get_summary_stats(time, type = "mean_sd")
+
+
+
+data_summary <- function(data, varname, groupnames){
+  require(plyr)
+  summary_func <- function(x, col){
+    c(mean = mean(x[[col]], na.rm=TRUE),
+      # sd = sd(x[[col]], na.rm=TRUE)),
+      se = sd(x[[col]], na.rm=TRUE) / sqrt(length(x[[col]])))
+  }
+  data_sum<-ddply(data, groupnames, .fun=summary_func,
+                  varname)
+  data_sum <- rename(data_sum, c("mean" = varname))
+ return(data_sum)
+}
+
+
+```
+
+## Plots
+
+```{r do plotting}
+
+df_summary1 <- data_summary(task_df, varname="time", 
+                    groupnames=c("condition"))
+# Convert dose to a factor variable
+df_summary1$condition=as.factor(df_summary1$condition)
+df_summary1
+
+p <- ggplot(df_summary1, aes(x=condition, y=time, fill=condition)) + 
+   geom_bar(stat="identity", position=position_dodge(), width=.7) +
+  geom_errorbar(aes(ymin=time-se, ymax=time+se), width=.3, size=1,
+                 position=position_dodge(.9)) +
+  ylim(0, 50) +
+  theme_minimal() +
+  labs(y = "Movement Time (s)", x = "") +
+  theme(axis.text.x = element_blank(),  # Rotate x-axis labels
+        # axis.text.x = element_text(hjust = 0.5, size = 18, face = "bold"),  # Rotate x-axis labels
+        legend.position = "bottom", legend.title = element_text(size=14), 
+        legend.text = element_text(size=32, face="bold"),
+        axis.text.y = element_text(size=32, face="bold"),
+        axis.title.y = element_text(size=30, face="bold")) +
+  scale_fill_manual("", values = c("#2C5985", "#83C4CB"))
+
+p
+
+ggsave("movement_time2.pdf", plot = p, width = 6, height = 5, device = "pdf")
+
+
+###############################################################################
+
+df_summary2 <- data_summary(task_df, varname="time", 
+                    groupnames=c("condition", "cond_order"))
+# Convert dose to a factor variable
+df_summary2$condition=as.factor(df_summary2$condition)
+df_summary2$cond_order=as.factor(df_summary2$cond_order)
+df_summary2
+
+
+
+ip <- ggplot(df_summary2, aes(x=cond_order, y=time, fill=condition)) + 
+   geom_bar(stat="identity", position=position_dodge()) +
+  geom_errorbar(aes(ymin=time-se, ymax=time+se), width=.3, size=1,
+                 position=position_dodge(.9)) +
+  ylim(0, 60) +
+  theme_minimal() +
+  labs(y = "Movement Time (s)", x = "") +
+  theme(axis.text.x = element_text(hjust = 0.5, size = 32, face = "bold"),  # Rotate x-axis labels
+        legend.position = "none", 
+        # legend.title = element_text(size=14), 
+        legend.text = element_text(size=30, face="bold"),
+        axis.text.y = element_text(size=30, face="bold"),
+        axis.title.y = element_text(size=30, face="bold")) +
+  scale_fill_manual("", values = c("#2C5985", "#83C4CB"))
+
+ip
+
+ggsave("movement_time2inter.pdf", plot = ip, width = 9, height = 5, device = "pdf")
+
+
+###############################################################################
+
+df_summary3 <- data_summary(task_df, varname="time", 
+                    groupnames=c("posture"))
+df_summary3$posture=as.factor(df_summary3$posture)
+df_summary3
+
+pp <- ggplot(df_summary3, aes(x=posture, y=time, fill=posture)) + 
+   geom_bar(stat="identity", position=position_dodge(), width=.7) +
+  geom_errorbar(aes(ymin=time-se, ymax=time+se), width=.3, size=1,
+                 position=position_dodge(.9)) +
+  ylim(0, 60) +
+  theme_minimal() +
+  labs(y = "Movement Time (s)", x = "") +
+  theme(axis.text.x = element_blank(),  # Rotate x-axis labels
+        # axis.text.x = element_text(hjust = 0.5, size = 18, face = "bold"),  # Rotate x-axis labels
+        legend.position = "bottom", legend.title = element_text(size=14), 
+        legend.text = element_text(size=32, face="bold"),
+        axis.text.y = element_text(size=32, face="bold"),
+        axis.title.y = element_text(size=30, face="bold")) +
+  scale_fill_manual("", values = c("#2C5985", "#83C4CB", "#FFFFCC", "#66FF66"))
+
+pp
+
+# ggsave("movement_time2posture.pdf", plot = pp, width = 9, height = 5, device = "pdf")
+
+
+```
+
+
+## Check assumptions
+
+```{r check assumptions}
+
+# bxp <- ggboxplot(task_df, x = "condition", y = "time", add = "jitter")
+# bxp
+# 
+# bxp <- ggboxplot(task_df, x = "cond_order", y = "time", add = "jitter", color = "condition")
+# bxp
+# # ggexport(bxp, filename = "tlx.png")
+# 
+# 
+# ggplot(task_df, aes(x = condition, y = time, 
+#                      shape = cond_order,
+#                      group = cond_order,
+#                      color = cond_order)) +
+#   stat_summary(fun = "mean", geom = "point", size = 3) +
+#   stat_summary(fun = "mean", geom = "line") +
+#   stat_summary(fun.data = "mean_se", geom = "errorbar", width = .2) +
+#   # scale_color_manual(values = c("blue", "darkorange")) +
+#   theme_classic()
+# 
+# 
+# bxp <- ggboxplot(task_df, "condition", "time",
+#    color = "condition", palette = c("#00AFBB", "#376491"),
+#    add = "jitter") +
+#   labs(y = "Movement Time (s)", x = "") +
+#   theme(legend.position = "none",
+#         axis.text.x = element_text(hjust = 0.5, size = 20, face = "bold"),
+#         axis.text.y = element_text(size=14, face="bold"),
+#         axis.title.x = element_text(size=14, face="bold"),
+#         axis.title.y = element_text(size=20, face="bold"))
+# 
+# bxp
+
+
+# p <- ggbarplot(
+#   task_df, x = "condition", y = "time", 
+#    add = c("mean_se"), 
+#    fill = "condition", palette = c("#2C5985", "#83C4CB"),
+#    position = position_dodge(0.8)
+#   ) +
+#   labs(y = "Movement Time (s)", x="") +
+#   theme(legend.position = "none",
+#         axis.text.x = element_text(hjust = 0.5, size = 19, face = "bold"),
+#         axis.text.y = element_text(size=20, face="bold"),
+#         axis.title.x = element_text(size=14, face="bold"),
+#         axis.title.y = element_text(size=20, face="bold"))
+# 
+# p
+# 
+# 
+# ip <- ggbarplot(
+#   task_df, x = "cond_order", y = "time", 
+#    add = c("mean_se"), 
+#    fill = "condition", palette = c("#2C5985", "#83C4CB"),
+#    position = position_dodge(0.8)
+#   ) +
+#   scale_fill_manual("" ,values=c("#2C5985", "#83C4CB")) +
+#   labs(y = "Movement Time (s)", x="") +
+#   theme(axis.text.x = element_text(hjust = 0.5, size = 19, face = "bold"),
+#         axis.text.y = element_text(size=20, face="bold"),
+#         axis.title.x = element_text(size=14, face="bold"),
+#         axis.title.y = element_text(size=20, face="bold"),
+#         legend.text = element_text(size=20, face="bold")
+#         )
+# 
+# ip
+
+
+######################### check for outliers ######################### 
+task_df %>%
+  group_by(condition) %>%
+  identify_outliers(time)
+
+######################### check normality ######################### 
+task_df %>%
+  group_by(condition) %>%
+  shapiro_test(time)
+ggqqplot(task_df, "time", facet.by = "condition")
+
+
+```
+
+
+## Fit Model
+
+```{r fit model}
+
+
+model <- lmer(time ~ cond_order * condition + (1 | pid), data = task_df)
+anova(model)
+
+
+res.aov <- anova_test(
+  data = task_df, dv = time, wid = pid,
+  within = c(condition, posture)
+  )
+get_anova_table(res.aov)
+
+
+# Compute mean time per participant
+tdf <- data_summary(task_df, varname="time", 
+                    groupnames=c("cond_order"))
+tdf$cond_order=as.factor(tdf$cond_order)
+tdf
+
+avg_time_df <- data_summary(task_df, varname="time", 
+                    groupnames=c("pid", "cond_order"))
+avg_time_df$cond_order=as.factor(avg_time_df$cond_order)
+
+anova_result <- aov(time ~ cond_order, data = avg_time_df)
+summary(anova_result)
+
+
+```
+
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
